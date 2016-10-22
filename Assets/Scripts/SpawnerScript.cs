@@ -15,14 +15,14 @@ public class SpawnerScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (lastYPosition < Camera.main.transform.position.y + Camera.main.orthographicSize) {
+        if (lastYPosition < Camera.main.transform.position.y + Camera.main.orthographicSize) { 
             Spawn();
         }
     }
 
     void Spawn() {
         Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)],
-            new Vector3(transform.position.x, transform.position.y+1.5f),
+            new Vector3(transform.position.x, transform.position.y),
             Quaternion.identity);
 
         lastYPosition = gameObject.transform.position.y;
