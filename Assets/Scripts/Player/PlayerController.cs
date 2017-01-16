@@ -5,21 +5,28 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
-	[SerializeField] private float _speed;
+	[HideInInspector] public UIController uiControl;
+	[SerializeField] private float _speed, _jumpSpeed;
 	[SerializeField] private float _moveSpeed;
-	[SerializeField] private SpriteRenderer _player;
+	[SerializeField] private SpriteRenderer _playerSpriteRenderer;
 	[SerializeField] private GameObject _gameOverPanel;
-	public bool isAccelerationMove, isHalfScreenMove, isCompMove;
+	[SerializeField] private PowerUpsController _powerUpController;
+	
+	public bool isAccelerationMove, isHalfScreenMove, isCompMove, isAlive;
 
 	void Awake()
 	{
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+		uiControl = FindObjectOfType<UIController>();
+		_playerSpriteRenderer = GetComponent<SpriteRenderer>();
+		_powerUpController = GetComponent<PowerUpsController>();
 	}
 
 	// Use this for initialization
 	void Start()
 	{
 		Time.timeScale = 1f;
+		isAlive = true;
 	}
 
 	// Update is called once per frame
@@ -28,20 +35,31 @@ public class PlayerController : MonoBehaviour
 		AccelerationMove(isAccelerationMove);
 		HalfScreenMove(isHalfScreenMove);
 		CompMove(isCompMove);
+		var playerShouldDie = Camera.main.WorldToScreenPoint(transform.position).y < Camera.main.orthographicSize * 0.1f;
+		if(isAlive && playerShouldDie)
+		{
+			uiControl.onGameOver();
+		}
 	}
 
-	void AccelerationMove(bool agreed)
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+            Death();
+    }
+
+    void AccelerationMove(bool agreed)
 	{
 		if(agreed)
 		{
 			transform.Translate(Input.acceleration.x * 0.3f, 0, 0);
 			if(Input.acceleration.x > 0.001f)
 			{
-				_player.flipX = true;
+				_playerSpriteRenderer.flipX = true;
 			}
 			if(Input.acceleration.x < 0.001f)
 			{
-				_player.flipX = false;
+				_playerSpriteRenderer.flipX = false;
 			}
 		}
 	}
@@ -58,12 +76,12 @@ public class PlayerController : MonoBehaviour
 				//Check if it is left or right?
 				if(touchPosition.x > halfScreen)
 				{
-					_player.flipX = true;
+					_playerSpriteRenderer.flipX = true;
 					transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
 				}
 				else if(touchPosition.x < halfScreen)
 				{
-					_player.flipX = false;
+					_playerSpriteRenderer.flipX = false;
 					transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
 				}
 			}
@@ -77,20 +95,15 @@ public class PlayerController : MonoBehaviour
 			if(Input.GetKey(KeyCode.D))
 			{
 				transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
-				_player.flipX = true;
+				_playerSpriteRenderer.flipX = true;
 			}
 			if(Input.GetKey(KeyCode.A))
 			{
 				transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
-				_player.flipX = false;
+				_playerSpriteRenderer.flipX = false;
 			}
 		}
 	}
-
-	/*public IEnumerator Death() {
-
-        yield return 0;
-    }*/
 
 	public void Death()
 	{
@@ -98,4 +111,16 @@ public class PlayerController : MonoBehaviour
 		_gameOverPanel.SetActive(true);
 		Time.timeScale = 0.0000000001f;
 	}
+
+    public float JumpSpeed
+    {
+        set
+        {
+            _jumpSpeed = value;
+        }
+        get
+        {
+            return _jumpSpeed;
+        }
+    }
 }

@@ -2,19 +2,18 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour {
+public class LoadScene : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update()
+	{
+		if(SceneManager.GetActiveScene().buildIndex == 0 && Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit();
+
 	}
 
-    public void LoadNumberScene(int sceneNumber) {
-        SceneManager.LoadScene(sceneNumber);
-    }
+	public void LoadNumberScene(int sceneNumber)
+	{
+		SceneManager.LoadScene(sceneNumber);
+	}
 }
