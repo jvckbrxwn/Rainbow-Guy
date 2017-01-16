@@ -13,4 +13,11 @@ public class TwoPlaneScript : MonoBehaviour {
         plane2.transform.position = new Vector2(Random.Range(halfOfScreen + 0.5f, 2.5f), 
             gameObject.transform.position.y);
     }
+
+    void Update()
+    {
+        var destroyPlane = Camera.main.WorldToScreenPoint(transform.position).y < Camera.main.orthographicSize;
+        if (destroyPlane)
+            Destroy(gameObject);
+    }
 }

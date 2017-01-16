@@ -123,4 +123,9 @@ public class PlayerController : MonoBehaviour
             return _jumpSpeed;
         }
     }
+
+    public void StayAlive()
+    {
+        Debug.Log("He stay alive!");
+    }
 }
