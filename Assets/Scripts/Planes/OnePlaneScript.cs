@@ -5,6 +5,6 @@ public class OnePlaneScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.position = new Vector2(Random.Range(-2.5f, 2.5f), transform.position.y);
+        transform.position = new Vector2(Random.Range(-2.85f, 2.85f), transform.position.y);
     }
 }

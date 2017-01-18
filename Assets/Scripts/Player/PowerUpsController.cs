@@ -33,7 +33,7 @@ public class PowerUpsController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.tag);
-        if (gameObject.tag == "Player")
+        if (gameObject.tag == "Player" || gameObject.tag == "DeadlyPlayer")
         {
             if (other.tag == "PowerUpFly")
             { StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]); }
