@@ -15,7 +15,7 @@ public class BouncyScript : MonoBehaviour
     void Start()
     {
         spawner = GameObject.FindGameObjectWithTag("Respawn");
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = FindObjectOfType<PlayerController>().gameObject;
         _playerControl = _player.GetComponent<PlayerController>();
         _soundManager = GameObject.FindObjectOfType<SoundManager>();
         _collider2D = GetComponent<Collider2D>();

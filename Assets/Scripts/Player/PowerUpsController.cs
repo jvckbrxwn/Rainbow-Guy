@@ -33,12 +33,15 @@ public class PowerUpsController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.tag);
-        if (other.tag == "PowerUpFly")
-        { StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]); }
-        if (other.tag == "PowerUpHighJump")
-        { StopAllCoroutines(); PowerUpAction(PowerUpState.high_jump); Destroy(other.gameObject); ChangeSprite(_sprites[1]); }
-        if (other.tag == "PowerUpDeadly")
-        { StopAllCoroutines(); PowerUpAction(PowerUpState.deadly); Destroy(other.gameObject); ChangeSprite(_sprites[2]); }
+        if (gameObject.tag == "Player")
+        {
+            if (other.tag == "PowerUpFly")
+            { StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]); }
+            if (other.tag == "PowerUpHighJump")
+            { StopAllCoroutines(); PowerUpAction(PowerUpState.high_jump); Destroy(other.gameObject); ChangeSprite(_sprites[1]); }
+            if (other.tag == "PowerUpDeadly")
+            { StopAllCoroutines(); PowerUpAction(PowerUpState.deadly); Destroy(other.gameObject); ChangeSprite(_sprites[2]); }
+        }
     }
 
     IEnumerator ChangeSpriteBack(Sprite sprite)
@@ -58,7 +61,11 @@ public class PowerUpsController : MonoBehaviour
 
     IEnumerator DeadlyPowerUp()
     {
-        yield return 0;
+        _playerControl.gameObject.tag = "DeadlyPlayer";
+        yield return new WaitForSeconds(5f);
+        _playerControl.gameObject.tag = "Player";
+        isDeadly = false;
+        StopCoroutine(DeadlyPowerUp());
     }
 
     IEnumerator FlyPowerUp()
@@ -75,7 +82,7 @@ public class PowerUpsController : MonoBehaviour
     void PowerUpAction(PowerUpState state)
     {
         if (state == PowerUpState.high_jump)
-            isHighJump = true; 
+            isHighJump = true;
         if (state == PowerUpState.fly)
             isFlying = true;
         if (state == PowerUpState.deadly)

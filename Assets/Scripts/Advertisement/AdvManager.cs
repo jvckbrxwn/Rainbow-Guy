@@ -1,10 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdvController : MonoBehaviour
+public class AdvManager : MonoBehaviour
 {
-    public static AdvController instance;
 
     public string gameId = "1266328"; // Set this value from the inspector.
     public bool enableTestMode = true;
@@ -14,7 +14,8 @@ public class AdvController : MonoBehaviour
     {
         _playerControl = FindObjectOfType<PlayerController>();
         #if !UNITY_ADS // If the Ads service is not enabled...
-        if (Advertisement.isSupported) { // If runtime platform is supported...
+        if (Advertisement.isSupported)
+        { // If runtime platform is supported...
             Advertisement.Initialize(gameId, enableTestMode); // ...initialize.
         }
         #endif
