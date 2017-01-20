@@ -34,7 +34,7 @@ public class DestroyBoxScript : MonoBehaviour
         }
         if (other.tag == "Player")
         {
-            pc.Death();
+            pc.Die(false);
         }
     }
 }

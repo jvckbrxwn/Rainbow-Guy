@@ -6,23 +6,11 @@ using UnityEngine.Advertisements;
 public class AdvManager : MonoBehaviour
 {
 
-    public string gameId = "1266328"; // Set this value from the inspector.
-    public bool enableTestMode = true;
     [SerializeField] private PlayerController _playerControl;
 
-    IEnumerator Start()
+    void Start()
     {
         _playerControl = FindObjectOfType<PlayerController>();
-        #if !UNITY_ADS // If the Ads service is not enabled...
-        if (Advertisement.isSupported)
-        { // If runtime platform is supported...
-            Advertisement.Initialize(gameId, enableTestMode); // ...initialize.
-        }
-        #endif
-        while (!Advertisement.isInitialized || !Advertisement.IsReady())
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     public void ShowAd()
@@ -30,7 +18,6 @@ public class AdvManager : MonoBehaviour
         ShowOptions options = new ShowOptions();
         options.resultCallback = HandleShowResult;
         Advertisement.Show(options);
-
     }
 
     private void HandleShowResult(ShowResult result)

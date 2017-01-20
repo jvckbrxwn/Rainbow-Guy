@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         var playerShouldDie = Camera.main.WorldToScreenPoint(transform.position).y < Camera.main.orthographicSize * 0.1f;
         if (isAlive && playerShouldDie)
         {
-            uiControl.onGameOver();
+            Die(false);
         }
     }
 
@@ -49,9 +49,10 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
         if (gameObject.tag == "Player")
             if (other.tag == "Enemy")
-                Death();
+                Die(true);
     }
 
+    #region Move Control
     void AccelerationMove(bool agreed)
     {
         if (agreed)
@@ -108,12 +109,16 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    #endregion
 
-    public void Death()
+    public void Die(bool deadBy)
     {
-        //SceneManager.LoadScene();
-        _gameOverPanel.SetActive(true);
-        Time.timeScale = 0.0000000001f;
+        uiControl.onGameOver(deadBy);
+    }
+
+    public void StayAlive()
+    {
+        Debug.Log("He stay alive!");
     }
 
     public float JumpSpeed
@@ -126,10 +131,5 @@ public class PlayerController : MonoBehaviour
         {
             return _jumpSpeed;
         }
-    }
-
-    public void StayAlive()
-    {
-        Debug.Log("He stay alive!");
     }
 }

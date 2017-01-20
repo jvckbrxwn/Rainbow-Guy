@@ -15,14 +15,14 @@ public class TapToPlayRotation : MonoBehaviour {
 
     IEnumerator RotateRight()
     {
-        LeanTween.rotateLocal(gameObject, _vectorTo, _time);
+        LeanTween.rotate(gameObject, _vectorTo, _time);
         yield return new WaitForSeconds(_time);
         StartCoroutine(RotateLeft());
     }
 
     IEnumerator RotateLeft()
     {
-        LeanTween.rotateLocal(gameObject, _vectorOut, _time);
+        LeanTween.rotate(gameObject, _vectorOut, _time);
         yield return new WaitForSeconds(_time);
         StartCoroutine(RotateRight());
     }
