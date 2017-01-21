@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die(bool deadBy)
     {
-        uiControl.onGameOver(deadBy);
+        uiControl.onGameOver();
     }
 
     public void StayAlive()

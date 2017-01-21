@@ -6,7 +6,7 @@
       <File FileName="Assets\Scripts\BouncyScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Menu\PlayerScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Sound\SoundManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\UIController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\UIController.cs" Line="138" Column="1" />
       <File FileName="Assets\LeanTween\Examples\Scripts\TestingAllCS.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Advertisement\AdvManager.cs" Line="1" Column="1" />
     </Files>
