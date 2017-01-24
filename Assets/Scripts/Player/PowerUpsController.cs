@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PowerUpsController : MonoBehaviour
 {
+    [HideInInspector] public bool isFlying = false;
     [SerializeField] private float _flySpeed;
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private Sprite[] _sprites;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Collider2D _collider2D;
-    private bool isFlying = false, isHighJump = false, isDeadly = false;
+    private bool isHighJump = false, isDeadly = false;
     private int low = 0;
     private PlayerController _playerControl;
 
@@ -36,12 +38,27 @@ public class PowerUpsController : MonoBehaviour
         if (gameObject.tag == "Player" || gameObject.tag == "DeadlyPlayer")
         {
             if (other.tag == "PowerUpFly")
-            { StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]); }
+                FlyPU(other);
             if (other.tag == "PowerUpHighJump")
-            { StopAllCoroutines(); PowerUpAction(PowerUpState.high_jump); Destroy(other.gameObject); ChangeSprite(_sprites[1]); }
+                HighJumpPU(other);
             if (other.tag == "PowerUpDeadly")
-            { StopAllCoroutines(); PowerUpAction(PowerUpState.deadly); Destroy(other.gameObject); ChangeSprite(_sprites[2]); }
+                DeadlyPU(other);
         }
+    }
+
+    private void DeadlyPU(Collider2D other)
+    {
+        StopAllCoroutines(); PowerUpAction(PowerUpState.deadly); Destroy(other.gameObject); ChangeSprite(_sprites[2]);
+    }
+
+    private void HighJumpPU(Collider2D other)
+    {
+        StopAllCoroutines(); PowerUpAction(PowerUpState.high_jump); Destroy(other.gameObject); ChangeSprite(_sprites[1]);
+    }
+
+    private void FlyPU(Collider2D other)
+    {
+        StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]);
     }
 
     IEnumerator ChangeSpriteBack(Sprite sprite)
@@ -68,7 +85,7 @@ public class PowerUpsController : MonoBehaviour
         StopCoroutine(DeadlyPowerUp());
     }
 
-    IEnumerator FlyPowerUp()
+    public IEnumerator FlyPowerUp()
     {
         _rigidbody2D.velocity = Vector2.zero;
         _collider2D.enabled = false;

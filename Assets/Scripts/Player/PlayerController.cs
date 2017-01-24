@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
-    [HideInInspector] public UIController uiControl;
+    [HideInInspector] public UIController _uiControl;
     [SerializeField] private float _speed, _jumpSpeed;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        uiControl = FindObjectOfType<UIController>();
+        _uiControl = FindObjectOfType<UIController>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _powerUpController = GetComponent<PowerUpsController>();
     }
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         var playerShouldDie = Camera.main.WorldToScreenPoint(transform.position).y < Camera.main.orthographicSize * 0.1f;
         if (isAlive && playerShouldDie)
         {
-            Die(false);
+            Die();
         }
     }
 
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
         if (gameObject.tag == "Player")
             if (other.tag == "Enemy")
-                Die(true);
+                Die();
     }
 
     #region Move Control
@@ -111,14 +111,22 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    public void Die(bool deadBy)
+    public void Die()
     {
-        uiControl.onGameOver();
+        _uiControl.onGameOver();
     }
 
     public void StayAlive()
     {
-        Debug.Log("He stay alive!");
+        _uiControl.OnStayAlive();
+        _powerUpController.isFlying = true;
+        StartCoroutine(IsAliveDelay());
+    }
+
+    IEnumerator IsAliveDelay()
+    {
+        yield return new WaitForSeconds(.5f);
+        isAlive = true;
     }
 
     public float JumpSpeed

@@ -65,6 +65,15 @@ public class UIController : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
+    public void OnStayAlive()
+    {
+        enablePause();
+        _playerController.isAccelerationMove = true;
+        AnimationGameOverOut();
+        StartCoroutine(StayAlive());
+        Time.timeScale = 1f;
+    }
+
 	public void hidePause()
 	{
 		_pauseButton.enabled = false;
@@ -126,6 +135,12 @@ public class UIController : MonoBehaviour
         }
         Time.timeScale = 1f;
         SceneManager.LoadScene(scene);
+    }
+
+    IEnumerator StayAlive()
+    {
+        yield return new WaitForSeconds(.5f);
+        _gameOverPanel.SetActive(false);
     }
     #endregion
 }
