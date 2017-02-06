@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class ResizeBackScript : MonoBehaviour
 {
 	[HideInInspector] public GameObject _player;
+    //private Rigidbody2D _rigidbody;
 	
 	// Use this for initialization
 	void Awake()
@@ -17,8 +18,11 @@ public class ResizeBackScript : MonoBehaviour
 		transform.localScale = new Vector3(
 			worldScreenWidth / sr.sprite.bounds.size.x,
 			worldScreenHeight / sr.sprite.bounds.size.y, 1);
-
-		_player = GameObject.FindGameObjectWithTag("Player");
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            _player = FindObjectOfType<PlayerController>().gameObject;
+            //_rigidbody = _player.GetComponent<Rigidbody2D>();
+        }
 	}
 
 	void Update()
@@ -28,8 +32,10 @@ public class ResizeBackScript : MonoBehaviour
 			{
 				if(_player.transform.position.y > transform.position.y)
 				{
-					this.transform.position = new Vector3(gameObject.transform.position.x, _player.transform.position.y, gameObject.transform.position.z);
+					transform.position = new Vector3(gameObject.transform.position.x, 
+                        _player.transform.position.y, 
+                        gameObject.transform.position.z);
 				}
-			}
-	}
+            }
+    }
 }

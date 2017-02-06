@@ -88,11 +88,11 @@ public class PowerUpsController : MonoBehaviour
     public IEnumerator FlyPowerUp()
     {
         _rigidbody2D.velocity = Vector2.zero;
-        _collider2D.enabled = false;
+        _playerControl.gameObject.tag = "FlyPlayer";
         _rigidbody2D.AddRelativeForce(Vector2.up * _flySpeed, ForceMode2D.Impulse);
         yield return new WaitForSeconds(5f);
         isFlying = false;
-        _collider2D.enabled = true;
+        _playerControl.gameObject.tag = "Player";
         StopCoroutine(FlyPowerUp());
     }
 

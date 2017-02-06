@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _playerControl = GameObject.FindObjectOfType<PlayerController>();
 	}
 
     void Start()

@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
     public bool isAccelerationMove, isHalfScreenMove, isCompMove, isAlive;
 
+    [SerializeField] private GameObject[] _hats;
+    [SerializeField] private GameObject[] _jackets;
+    [SerializeField] private GameObject[] _shoes;
+
     void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
