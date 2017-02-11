@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -30,29 +31,49 @@ public class SoundManager : MonoBehaviour
 	{
 		if(level == 1)
 			_mainMusic.mute = true;
-		else
-			_mainMusic.mute = false;
 	}
 
-    public void SoundMute(bool isOn = true)
+    public void Init() {
+        if (PlayerPrefs.HasKey("isSoundOn"))
+            Sound(!Convert.ToBoolean(PlayerPrefs.GetInt("isSoundOn")));
+        else
+            Sound(false);
+        if (PlayerPrefs.HasKey("isMusicOn"))
+            Music(!Convert.ToBoolean(PlayerPrefs.GetInt("isMusicOn")));
+        else
+            Music(false);
+    }
+
+    public void InitSound(Toggle _Toggle)
+    {
+        if (PlayerPrefs.HasKey("isSoundOn"))
+            _Toggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("isSoundOn"));
+        else
+            _Toggle.isOn = true;
+    }
+    public void InitMusic(Toggle _Toggle)
+    { 
+        if (PlayerPrefs.HasKey("isMusicOn"))
+            _Toggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("isMusicOn"));
+        else
+            _Toggle.isOn = true;
+    }
+
+    public void Sound(bool isOn = false)
     {
         _deathSound.mute = isOn;
         _greenPlatformSound.mute = isOn;
-        _mainMusic.mute = isOn;
         _powerUpSound.mute = isOn;
 	}
 
-    public void SoundPlay(bool isOn = false)
+    public void Music(bool isOn = false)
     {
-        _deathSound.mute = isOn;
-        _greenPlatformSound.mute = isOn;
         _mainMusic.mute = isOn;
-        _powerUpSound.mute = isOn;
     }
 
     public bool isMuted()
     {
-        return _mainMusic.mute && _deathSound.mute && _greenPlatformSound.mute && _powerUpSound.mute;
+        return _deathSound.mute && _greenPlatformSound.mute && _powerUpSound.mute;
     }
 
     public void RedPlatformSoundPlay(Transform transform)
@@ -90,9 +111,18 @@ public class SoundManager : MonoBehaviour
 		Debug.Log("Status sound: " + Convert.ToInt32(isSoundOn));
 		PlayerPrefs.SetInt("isSoundOn", Convert.ToInt32(isSoundOn));
 	}
-	#endregion
 
-	#region privateFunctions
+    public void SaveMusicStatus(bool isMusicOn)
+    {
+        Debug.Log("Status music: " + Convert.ToInt32(isMusicOn));
+        PlayerPrefs.SetInt("isMusicOn", Convert.ToInt32(isMusicOn));
+    }
+    #endregion
 
-	#endregion
+    #region privateFunctions
+    private void SaveStatus()
+    {
+        PlayerPrefs.Save();
+    }
+    #endregion
 }

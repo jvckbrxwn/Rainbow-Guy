@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Assets.SimpleAndroidNotifications;
+using System;
 
 public class UIController : MonoBehaviour
 {
@@ -15,8 +17,7 @@ public class UIController : MonoBehaviour
         _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
 
-	void Update()
-	{
+	void Update() {
 		if(_pausePanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
 			onContinue();
 		else if(_gameOverPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))

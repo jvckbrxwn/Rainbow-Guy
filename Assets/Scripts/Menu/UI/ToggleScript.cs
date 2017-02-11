@@ -6,39 +6,52 @@ using System;
 [RequireComponent(typeof(Toggle))]
 public class ToggleScript : MonoBehaviour
 {
-	[SerializeField] private SoundManager _soundManager;
+	private SoundManager _soundManager;
 	public Sprite Inactive = null;
-
 	private Toggle _Toggle = null;
-	private Image _Background = null;
+	[SerializeField] private Image _Background = null;
 	private Sprite _BackgroundActive = null;
 
-	void Awake()
+	void Start()
 	{
 		_soundManager = GameObject.FindObjectOfType<SoundManager>();
 		_Toggle = GetComponent<Toggle>();
-		_Background = transform.GetComponentInChildren<Image>();
 		_BackgroundActive = _Background.sprite;
-		if(PlayerPrefs.HasKey("isSoundOn"))
-			_Toggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("isSoundOn"));
-		else
-			_Toggle.isOn = true;
-		Toggle();
+        if (gameObject.tag == "SoundButton")
+            _soundManager.InitSound(_Toggle);
+        if (gameObject.tag == "MusicButton")
+            _soundManager.InitMusic(_Toggle);
 	}
 
-	public void Toggle()
+	public void ToggleSound()
 	{
 		if(_Toggle.isOn)
 		{
-			_soundManager.SoundPlay();
+			_soundManager.Sound(false);
 			_Background.sprite = _BackgroundActive;
 			_soundManager.SaveSoundStatus(true);
 		}
 		else
 		{
-			_soundManager.SoundMute();
+			_soundManager.Sound(true);
 			_Background.sprite = Inactive;
 			_soundManager.SaveSoundStatus(false);
 		}
 	}
+
+    public void ToggleMusic()
+    {
+        if (_Toggle.isOn)
+        {
+            _soundManager.Music(false);
+            _Background.sprite = _BackgroundActive;
+            _soundManager.SaveMusicStatus(true);
+        }
+        else
+        {
+            _soundManager.Music(true);
+            _Background.sprite = Inactive;
+            _soundManager.SaveMusicStatus(false);
+        }
+    }
 }

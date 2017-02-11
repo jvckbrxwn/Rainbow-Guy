@@ -1,16 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Assets.SimpleAndroidNotifications;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIMenuController : MonoBehaviour {
 
-    [SerializeField] private GameObject _settingsPanel, _settingsPanelChild,
-        _shopPanel;
+    [SerializeField] private GameObject _settingsPanel, _settingsPanelChild, _shopPanel;
+    private SoundManager _soundManager;
 
     // Use this for initialization
     void Start() {
+        Init();
+    }
 
+    private void Init()
+    {
+        _soundManager = FindObjectOfType<SoundManager>();
+        _soundManager.Init();
     }
 
     // Update is called once per frame
