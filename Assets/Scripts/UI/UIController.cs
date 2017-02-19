@@ -111,7 +111,7 @@ public class UIController : MonoBehaviour
     void AnimationGameOverOut()
     {
         _gameOverPanel.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, true);
-        LeanTween.move(_gameOverChildrenPanel, new Vector2(0, _gameOverPanel.transform.position.y + 10f), .5f).setEase(LeanTweenType.easeInOutSine).setIgnoreTimeScale(true);
+        LeanTween.move(_gameOverChildrenPanel, new Vector2(0, _gameOverPanel.transform.position.y + 20f), .5f).setEase(LeanTweenType.easeInOutSine).setIgnoreTimeScale(true);
     }
 
     void AnimationPausePanelOut()

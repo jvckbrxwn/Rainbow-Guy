@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,6 +54,19 @@ public class PlayerController : MonoBehaviour
         if (gameObject.tag == "Player")
             if (other.tag == "Enemy")
                 Die();
+        if (gameObject.tag == "DeadlyPlayer" || gameObject.tag == "Player")
+            if (other.tag == "Blackhole")
+                StartCoroutine(DieInBlackHole());
+    }
+
+    private IEnumerator DieInBlackHole()
+    {
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        LeanTween.rotateZ(gameObject, 700f, 0.5f);
+        LeanTween.scale(gameObject, new Vector2(2f, 2f), 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        Die();
     }
 
     #region Move Control
@@ -121,9 +135,17 @@ public class PlayerController : MonoBehaviour
 
     public void StayAlive()
     {
+        RigidbodySettings(false, 5f);
         _uiControl.OnStayAlive();
         _powerUpController.isFlying = true;
         StartCoroutine(IsAliveDelay());
+    }
+
+    private void RigidbodySettings(bool kinematic, float lScale)
+    {
+        gameObject.transform.localScale = new Vector2(lScale, lScale);
+        gameObject.GetComponent<Rigidbody2D>().isKinematic = kinematic;
+        gameObject.transform.rotation = Quaternion.identity;
     }
 
     IEnumerator IsAliveDelay()

@@ -11,7 +11,9 @@ public class LoadScene : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0 && Input.GetKeyDown(KeyCode.Escape))
         {
-            NotificationManager.SendWithAppIcon(TimeSpan.FromHours(8), "DUD3", "Come back!", new Color(0, 0.6f, 1), NotificationIcon.Message);
+            NotificationManager.CancelAll();
+            NotificationManager.SendWithAppIcon(TimeSpan.FromHours(8), "DUD3", "Come back, ya piece of sh1t!", 
+                new Color(0, 0.6f, 1), NotificationIcon.Message);
             Application.Quit();
         }
     }

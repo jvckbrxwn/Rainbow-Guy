@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class BluePlaneScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        
+    private float _delta = 2.8f;  // Amount to move left and right from the start point
+    private float _speed;
+    private Vector3 startPos;
+
+    void Start()
+    {
+        startPos = new Vector3(0, transform.position.y);
+        _speed = Random.Range(0.3f, 1f);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    void Update()
+    {
+        Vector3 v = startPos;
+        v.x += _delta * Mathf.Sin(Time.time * _speed);
+        transform.position = v;
+    }
 }
