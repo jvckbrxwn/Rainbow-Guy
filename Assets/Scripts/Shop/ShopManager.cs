@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour {
 
     [SerializeField] private Text _text;
-    [SerializeField] private int _price;
+    [SerializeField] private GameObject _hatsPanel;
+    [SerializeField] private GameObject _jacketsPanel;
+    [SerializeField] private GameObject _shoesPanel;
 
+    private int _price;
     private List<int> unlockHats = new List<int>();
     private List<int> unlockJackets = new List<int>();
     private List<int> unlockShoes = new List<int>();
@@ -106,6 +109,35 @@ public class ShopManager : MonoBehaviour {
     }
     #endregion
 
+    #region ButtonsToOpen
+    public void OpenHats()
+    {
+        _hatsPanel.SetActive(true);
+        if (_jacketsPanel.activeSelf)
+            _jacketsPanel.SetActive(false);
+        if (_shoesPanel.activeSelf)
+            _shoesPanel.SetActive(false);
+    }
+
+    public void OpenJackets()
+    {
+        _jacketsPanel.SetActive(true);
+        if (_hatsPanel.activeSelf)
+            _hatsPanel.SetActive(false);
+        if (_shoesPanel.activeSelf)
+            _shoesPanel.SetActive(false);
+    }
+
+    public void OpenShoes()
+    {
+        _shoesPanel.SetActive(true);
+        if (_hatsPanel.activeSelf)
+            _hatsPanel.SetActive(false);
+        if (_jacketsPanel.activeSelf)
+            _jacketsPanel.SetActive(false);
+    }
+    #endregion
+
     private void UpdateTextCoins()
     {
         _text.text = "Coins: " + CoinsManager.Coins.ToString();
@@ -144,6 +176,14 @@ public class ShopManager : MonoBehaviour {
         set
         {
 
+        }
+    }
+
+    public int SetPrice
+    {
+        set
+        {
+            _price = value;
         }
     }
 }

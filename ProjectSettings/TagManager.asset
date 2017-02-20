@@ -20,6 +20,9 @@ TagManager:
   - MusicButton
   - BluePlatform
   - Blackhole
+  - HatsPanel
+  - JacketsPanel
+  - ShoesPanel
   layers:
   - Default
   - TransparentFX
