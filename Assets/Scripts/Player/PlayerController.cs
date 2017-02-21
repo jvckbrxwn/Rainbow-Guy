@@ -5,18 +5,15 @@ using System;
 public class PlayerController : MonoBehaviour
 {
 
-    [HideInInspector] public UIController _uiControl;
     [SerializeField] private float _speed, _jumpSpeed;
     [SerializeField] private float _moveSpeed;
-    [SerializeField] private SpriteRenderer _playerSpriteRenderer;
     [SerializeField] private GameObject _gameOverPanel;
-    [SerializeField] private PowerUpsController _powerUpController;
+    private UIController _uiControl;
+    private SpriteRenderer _playerSpriteRenderer;
+    private PowerUpsController _powerUpController;
+    private ClothesManager _cloth;
 
     public bool isAccelerationMove, isHalfScreenMove, isCompMove, isAlive;
-
-    [SerializeField] private GameObject[] _hats;
-    [SerializeField] private GameObject[] _jackets;
-    [SerializeField] private GameObject[] _shoes;
 
     void Awake()
     {
@@ -24,6 +21,7 @@ public class PlayerController : MonoBehaviour
         _uiControl = FindObjectOfType<UIController>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _powerUpController = GetComponent<PowerUpsController>();
+        _cloth = GetComponent<ClothesManager>();
     }
 
     // Use this for initialization
@@ -75,13 +73,13 @@ public class PlayerController : MonoBehaviour
         if (agreed)
         {
             transform.Translate(Input.acceleration.x * 0.3f, 0, 0);
-            if (Input.acceleration.x > 0.001f)
+            if (Input.acceleration.x > 0.01f)
             {
-                _playerSpriteRenderer.flipX = true;
+                FlipX(true);
             }
-            if (Input.acceleration.x < 0.001f)
+            if (Input.acceleration.x < 0.01f)
             {
-                _playerSpriteRenderer.flipX = false;
+                FlipX(false);
             }
         }
     }
@@ -98,12 +96,12 @@ public class PlayerController : MonoBehaviour
                 //Check if it is left or right?
                 if (touchPosition.x > halfScreen)
                 {
-                    _playerSpriteRenderer.flipX = true;
+                    FlipX(true);
                     transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
                 }
                 else if (touchPosition.x < halfScreen)
                 {
-                    _playerSpriteRenderer.flipX = false;
+                    FlipX(false);
                     transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
                 }
             }
@@ -117,14 +115,22 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector2.right * _moveSpeed * Time.deltaTime);
-                _playerSpriteRenderer.flipX = true;
+                FlipX(true);
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(Vector2.left * _moveSpeed * Time.deltaTime);
-                _playerSpriteRenderer.flipX = false;
+                FlipX(false);
             }
         }
+    }
+
+    private void FlipX(bool isFlip)
+    {
+        _playerSpriteRenderer.flipX = isFlip;
+        _cloth._playerSprites[0].flipX = isFlip;
+        _cloth._playerSprites[1].flipX = isFlip;
+        _cloth._playerSprites[2].flipX = isFlip;
     }
     #endregion
 

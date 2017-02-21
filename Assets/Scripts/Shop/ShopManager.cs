@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ShopManager : MonoBehaviour {
 
@@ -10,17 +11,20 @@ public class ShopManager : MonoBehaviour {
     [SerializeField] private GameObject _hatsPanel;
     [SerializeField] private GameObject _jacketsPanel;
     [SerializeField] private GameObject _shoesPanel;
+    [SerializeField] private ToggleGroup _toggleGroup;
 
-    private int _price;
+    private int _price, selectedHat, selectedJacket, selectedShoe;
     private List<int> unlockHats = new List<int>();
     private List<int> unlockJackets = new List<int>();
     private List<int> unlockShoes = new List<int>();
 
-    private void Start()
+    void Start()
     {
+        _toggleGroup = FindObjectOfType<ToggleGroup>();
         GetHats();
         GetJackets();
         GetShoes();
+        
         CoinsManager.GetCoins();
         UpdateTextCoins();
     } 
@@ -50,6 +54,9 @@ public class ShopManager : MonoBehaviour {
             UpdateTextCoins();
             Debug.Log("Click Hat " + item.ToString());
         }
+        SelectedHat = item;
+        PlayerPrefs.SetInt("SelectedHat", SelectedHat);
+        Debug.Log("Select hat: " + SelectedHat);
     }
     #endregion
 
@@ -78,6 +85,9 @@ public class ShopManager : MonoBehaviour {
             UpdateTextCoins();
             Debug.Log("Click Jacket " + item.ToString());
         }
+        SelectedJacket = item;
+        PlayerPrefs.SetInt("SelectedJacket", SelectedJacket);
+        Debug.Log("Select jacket: " + SelectedJacket);
     }
     #endregion
 
@@ -106,6 +116,9 @@ public class ShopManager : MonoBehaviour {
             UpdateTextCoins();
             Debug.Log("Click Shoe " + item.ToString());
         }
+        SelectedShoe = item;
+        PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
+        Debug.Log("Select shoe: " + SelectedShoe);
     }
     #endregion
 
@@ -143,39 +156,39 @@ public class ShopManager : MonoBehaviour {
         _text.text = "Coins: " + CoinsManager.Coins.ToString();
     }
 
-    public static int SelectedHat
+    public int SelectedHat
     {
-        get
-        {
-            return 0;
-        }
         set
         {
-
+            selectedHat = value;
+        }
+        get
+        {
+            return selectedHat;
         }
     }
 
-    public static int SelectedJacket
+    public int SelectedJacket
     {
         get
         {
-            return 0;
+            return selectedJacket;
         }
         set
         {
-
+            selectedJacket = value;
         }
     }
 
-    public static int SelectedShoe
+    public int SelectedShoe
     {
         get
         {
-            return 0;
+            return selectedJacket;
         }
         set
         {
-
+            selectedJacket = value;
         }
     }
 
