@@ -3016,6 +3016,7 @@ MonoBehaviour:
   - {fileID: 1582643042723038, guid: 2b6202de13a84cd4e81acad0e0bf1166, type: 2}
   - {fileID: 1840181217052360}
   - {fileID: 1648858397779280, guid: 527190c1f58a9c04dba6559322ac0879, type: 2}
+  - {fileID: 1096810929972474, guid: bc53e50127f772e4aa2717fc4bc5162e, type: 2}
 --- !u!114 &114436149025327590
 MonoBehaviour:
   m_ObjectHideFlags: 1

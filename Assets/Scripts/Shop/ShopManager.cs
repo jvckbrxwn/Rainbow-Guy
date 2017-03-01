@@ -11,23 +11,42 @@ public class ShopManager : MonoBehaviour {
     [SerializeField] private GameObject _hatsPanel;
     [SerializeField] private GameObject _jacketsPanel;
     [SerializeField] private GameObject _shoesPanel;
-    [SerializeField] private ToggleGroup _toggleGroup;
+    [SerializeField] private ToggleGroup _hatToggleGroup;
+    [SerializeField] private ToggleGroup _jacketToggleGroup;
+    [SerializeField] private ToggleGroup _shoeToggleGroup;
+    [SerializeField] private Toggle[] _toggleHats;
+    [SerializeField] private Toggle[] _toggleJacket;
+    [SerializeField] private Toggle[] _toggleShoe;
+    [SerializeField] private GameObject _buyThisPanel;
+    [SerializeField] private Image _buyImage;
+    [SerializeField] private Text _buyCostText;
+    [SerializeField] private Button _applyButton;
+    [SerializeField] private Button _cancelButton;
 
     private int _price, selectedHat, selectedJacket, selectedShoe;
     private List<int> unlockHats = new List<int>();
     private List<int> unlockJackets = new List<int>();
     private List<int> unlockShoes = new List<int>();
 
-    void Start()
+    private void Start()
     {
-        _toggleGroup = FindObjectOfType<ToggleGroup>();
+        Init();
+    }
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
         GetHats();
         GetJackets();
         GetShoes();
-        
+        GetHatIsOn();
         CoinsManager.GetCoins();
         UpdateTextCoins();
-    } 
+    }
 
     #region Hats
     public void BuyHatOne(int item)
@@ -40,6 +59,12 @@ public class ShopManager : MonoBehaviour {
         try
         {
             unlockHats.AddRange(PlayerPrefsX.GetIntArray("UnlockHat"));
+            unlockHats.Sort();
+            for (int i = 0; i < _toggleHats.Length; i++)
+            {
+                if (unlockHats.Contains(i))
+                    _toggleHats[i].GetComponentInChildren<Text>().text = "exist";
+            }
         }
         catch { }
     }
@@ -48,15 +73,31 @@ public class ShopManager : MonoBehaviour {
     {
         if (!unlockHats.Contains(item))
         {
+            OpenBuyThisHat(item);
+        }
+    }
+
+    private void OpenBuyThisHat(int item)
+    {
+        _buyImage.sprite = _toggleHats[item].GetComponent<Image>().sprite;
+        _buyCostText.text = "it costs " +_price+ " coins";
+        _buyThisPanel.SetActive(true);
+        _applyButton.onClick.AddListener(() =>
+        {
             unlockHats.Add(item);
             PlayerPrefsX.SetIntArray("UnlockHat", unlockHats.ToArray());
             CoinsManager.SetCoins(-_price);
             UpdateTextCoins();
-            Debug.Log("Click Hat " + item.ToString());
-        }
-        SelectedHat = item;
-        PlayerPrefs.SetInt("SelectedHat", SelectedHat);
-        Debug.Log("Select hat: " + SelectedHat);
+            SelectedHat = item;
+            PlayerPrefs.SetInt("SelectedHat", SelectedHat);
+            _toggleHats[item].GetComponentInChildren<Text>().text = "exist";
+            _buyThisPanel.SetActive(false);
+        });
+        _cancelButton.onClick.AddListener(() =>
+        {
+            GetHatIsOn();
+            _buyThisPanel.SetActive(false);
+        });
     }
     #endregion
 
@@ -71,6 +112,12 @@ public class ShopManager : MonoBehaviour {
         try
         {
             unlockJackets.AddRange(PlayerPrefsX.GetIntArray("UnlockJacket"));
+            unlockJackets.Sort();
+            for (int i = 0; i < _toggleJacket.Length; i++)
+            {
+                if (unlockJackets.Contains(i))
+                    _toggleJacket[i].GetComponentInChildren<Text>().text = "exist";
+            }
         }
         catch { }
     }
@@ -79,15 +126,31 @@ public class ShopManager : MonoBehaviour {
     {
         if (!unlockJackets.Contains(item))
         {
+            OpenBuyThisJacket(item);
+        }
+    }
+
+    private void OpenBuyThisJacket(int item)
+    {
+        _buyImage.sprite = _toggleJacket[item].GetComponent<Image>().sprite;
+        _buyCostText.text = "it costs " + _price + " coins";
+        _buyThisPanel.SetActive(true);
+        _applyButton.onClick.AddListener(() =>
+        {
             unlockJackets.Add(item);
             PlayerPrefsX.SetIntArray("UnlockJacket", unlockJackets.ToArray());
             CoinsManager.SetCoins(-_price);
             UpdateTextCoins();
-            Debug.Log("Click Jacket " + item.ToString());
-        }
-        SelectedJacket = item;
-        PlayerPrefs.SetInt("SelectedJacket", SelectedJacket);
-        Debug.Log("Select jacket: " + SelectedJacket);
+            _toggleJacket[item].GetComponentInChildren<Text>().text = "exist";
+            SelectedJacket = item;
+            PlayerPrefs.SetInt("SelectedJacket", SelectedJacket);
+            _buyThisPanel.SetActive(false);
+        });
+        _cancelButton.onClick.AddListener(() =>
+        {
+            GetJacketIsOn();
+            _buyThisPanel.SetActive(false);
+        });
     }
     #endregion
 
@@ -102,6 +165,12 @@ public class ShopManager : MonoBehaviour {
         try
         {
             unlockShoes.AddRange(PlayerPrefsX.GetIntArray("UnlockShoe"));
+            unlockShoes.Sort();
+            for (int i = 0; i < _toggleShoe.Length; i++)
+            {
+                if (unlockShoes.Contains(i))
+                    _toggleShoe[i].GetComponentInChildren<Text>().text = "exist";
+            }
         }
         catch { }
     }
@@ -110,21 +179,38 @@ public class ShopManager : MonoBehaviour {
     {
         if (!unlockShoes.Contains(item))
         {
+            OpenBuyThisShoe(item);
+        }
+    }
+
+    private void OpenBuyThisShoe(int item)
+    {
+        _buyImage.sprite = _toggleShoe[item].GetComponent<Image>().sprite;
+        _buyCostText.text = "it costs " + _price + " coins";
+        _buyThisPanel.SetActive(true);
+        _applyButton.onClick.AddListener(() =>
+        {
             unlockShoes.Add(item);
             PlayerPrefsX.SetIntArray("UnlockShoe", unlockShoes.ToArray());
             CoinsManager.SetCoins(-_price);
             UpdateTextCoins();
-            Debug.Log("Click Shoe " + item.ToString());
-        }
-        SelectedShoe = item;
-        PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
-        Debug.Log("Select shoe: " + SelectedShoe);
+            _toggleShoe[item].GetComponentInChildren<Text>().text = "exist";
+            SelectedShoe = item;
+            PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
+            _buyThisPanel.SetActive(false);
+        });
+        _cancelButton.onClick.AddListener(() =>
+        {
+            GetShoeIsOn();
+            _buyThisPanel.SetActive(false);
+        });
     }
     #endregion
 
     #region ButtonsToOpen
     public void OpenHats()
     {
+        GetHatIsOn();
         _hatsPanel.SetActive(true);
         if (_jacketsPanel.activeSelf)
             _jacketsPanel.SetActive(false);
@@ -134,6 +220,7 @@ public class ShopManager : MonoBehaviour {
 
     public void OpenJackets()
     {
+        GetJacketIsOn();
         _jacketsPanel.SetActive(true);
         if (_hatsPanel.activeSelf)
             _hatsPanel.SetActive(false);
@@ -143,6 +230,7 @@ public class ShopManager : MonoBehaviour {
 
     public void OpenShoes()
     {
+        GetShoeIsOn();
         _shoesPanel.SetActive(true);
         if (_hatsPanel.activeSelf)
             _hatsPanel.SetActive(false);
@@ -151,11 +239,33 @@ public class ShopManager : MonoBehaviour {
     }
     #endregion
 
-    private void UpdateTextCoins()
+    #region Get PlayerPrefs Items To "Active" Toggle
+    private void GetHatIsOn()
     {
-        _text.text = "Coins: " + CoinsManager.Coins.ToString();
+        if (PlayerPrefs.HasKey("SelectedHat"))
+        {
+            _toggleHats[PlayerPrefs.GetInt("SelectedHat")].isOn = true;
+        }
     }
 
+    private void GetJacketIsOn()
+    {
+        if (PlayerPrefs.HasKey("SelectedJacket"))
+        {
+            _toggleJacket[PlayerPrefs.GetInt("SelectedJacket")].isOn = true;
+        }
+    }
+
+    private void GetShoeIsOn()
+    {
+        if (PlayerPrefs.HasKey("SelectedShoe"))
+        {
+            _toggleShoe[PlayerPrefs.GetInt("SelectedShoe")].isOn = true;
+        }
+    }
+    #endregion
+
+    #region "Selected" Properties & Set Price
     public int SelectedHat
     {
         set
@@ -198,5 +308,11 @@ public class ShopManager : MonoBehaviour {
         {
             _price = value;
         }
+    }
+    #endregion
+
+    private void UpdateTextCoins()
+    {
+        _text.text = "Coins: " + CoinsManager.Coins.ToString();
     }
 }

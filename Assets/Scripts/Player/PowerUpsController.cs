@@ -34,7 +34,6 @@ public class PowerUpsController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (gameObject.tag == "Player" || gameObject.tag == "DeadlyPlayer")
         {
             if (other.tag == "PowerUpFly")

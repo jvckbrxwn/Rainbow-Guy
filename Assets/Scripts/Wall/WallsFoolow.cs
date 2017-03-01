@@ -11,7 +11,7 @@ public class WallsFoolow : MonoBehaviour
 
 	void Start()
 	{
-		_player = GameObject.FindGameObjectWithTag("Player");
+		_player = FindObjectOfType<PlayerController>().gameObject;
 		_trailRender = _player.GetComponent<TrailRenderer>();
 	}
 
@@ -28,14 +28,16 @@ public class WallsFoolow : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "Player" && gameObject.tag == "LeftWall")
-		{
-			_player.transform.position = new Vector2(_rightWall.position.x - 0.4f, _player.transform.position.y);
-		}
+        if (other.tag == "Player" || other.tag == "DeadlyPlayer")
+            if (gameObject.tag == "LeftWall")
+            {
+                _player.transform.position = new Vector2(_rightWall.position.x - 0.4f, _player.transform.position.y);
+            }
 
-		if(other.tag == "Player" && gameObject.tag == "RightWall")
-		{
-			_player.transform.position = new Vector2(_leftWall.position.x + 0.4f, _player.transform.position.y);
-		}
+        if (other.tag == "Player" || other.tag == "DeadlyPlayer")
+            if (gameObject.tag == "RightWall")
+            {
+                _player.transform.position = new Vector2(_leftWall.position.x + 0.4f, _player.transform.position.y);
+            }
 	}
 }

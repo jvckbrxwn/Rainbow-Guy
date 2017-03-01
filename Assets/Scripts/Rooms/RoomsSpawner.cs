@@ -4,7 +4,7 @@ public class RoomsSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject[] _roomsObjects;
     private string[] _rooms = new[] { "room_standart", "room_flashlight", "room_standart1", "room_standart2", "room_standart3",
-        "room_little1"};
+        "room_little1", "room_enemys"};
 
     private void OnTriggerEnter2D(Collider2D other)
     {
