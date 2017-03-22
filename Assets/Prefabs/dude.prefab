@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012477630966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 4000012885634888}
@@ -337,13 +337,13 @@ MonoBehaviour:
   itemsToSpawn:
   - {fileID: 1000013493190882, guid: 2cac5802996d85c479d44a937d91b168, type: 2}
   - {fileID: 1000011789746980, guid: b2dadff5a816811428e3e503e3a17795, type: 2}
-  - {fileID: 1000013283403986, guid: 5bd87b717cb124541b610e736587abb7, type: 2}
+  - {fileID: 0}
   - {fileID: 1000013493190882, guid: 2cac5802996d85c479d44a937d91b168, type: 2}
   - {fileID: 1000011789746980, guid: b2dadff5a816811428e3e503e3a17795, type: 2}
-  - {fileID: 1000013283403986, guid: 5bd87b717cb124541b610e736587abb7, type: 2}
+  - {fileID: 0}
   - {fileID: 1000013493190882, guid: 2cac5802996d85c479d44a937d91b168, type: 2}
-  - {fileID: 1000013283403986, guid: 5bd87b717cb124541b610e736587abb7, type: 2}
-  - {fileID: 1000013283403986, guid: 5bd87b717cb124541b610e736587abb7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1000013721153816, guid: a6d08317552812a41abe51ca1b9acc95, type: 2}
   - {fileID: 1000010815164728, guid: 7d6b5420e44f7f540a0eeeebccb3509a, type: 2}
   - {fileID: 1116936667024180, guid: 65171c1cf699e6641adda5a211ba3fe1, type: 2}
@@ -369,6 +369,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4748d0366f9014441b35d8b635d85474, type: 3}
   _spriteRenderer: {fileID: 0}
   _collider2D: {fileID: 0}
+  _flashlightPanel: {fileID: 0}
 --- !u!114 &114700558760605088
 MonoBehaviour:
   m_ObjectHideFlags: 1

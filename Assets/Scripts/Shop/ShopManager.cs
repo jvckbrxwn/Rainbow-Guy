@@ -33,10 +33,10 @@ public class ShopManager : MonoBehaviour {
         Init();
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         Init();
-    }
+    }*/
 
     private void Init()
     {
@@ -59,7 +59,6 @@ public class ShopManager : MonoBehaviour {
         try
         {
             unlockHats.AddRange(PlayerPrefsX.GetIntArray("UnlockHat"));
-            unlockHats.Sort();
             for (int i = 0; i < _toggleHats.Length; i++)
             {
                 if (unlockHats.Contains(i))
@@ -74,6 +73,11 @@ public class ShopManager : MonoBehaviour {
         if (!unlockHats.Contains(item))
         {
             OpenBuyThisHat(item);
+        }
+        else
+        {
+            SelectedHat = item;
+            PlayerPrefs.SetInt("SelectedHat", SelectedHat);
         }
     }
 
@@ -128,6 +132,11 @@ public class ShopManager : MonoBehaviour {
         {
             OpenBuyThisJacket(item);
         }
+        else
+        {
+            SelectedJacket = item;
+            PlayerPrefs.SetInt("SelectedJacket", SelectedJacket);
+        }
     }
 
     private void OpenBuyThisJacket(int item)
@@ -181,6 +190,11 @@ public class ShopManager : MonoBehaviour {
         {
             OpenBuyThisShoe(item);
         }
+        else
+        {
+            SelectedShoe = item;
+            PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
+        }
     }
 
     private void OpenBuyThisShoe(int item)
@@ -191,12 +205,12 @@ public class ShopManager : MonoBehaviour {
         _applyButton.onClick.AddListener(() =>
         {
             unlockShoes.Add(item);
-            PlayerPrefsX.SetIntArray("UnlockShoe", unlockShoes.ToArray());
+            SelectedShoe = item;
             CoinsManager.SetCoins(-_price);
             UpdateTextCoins();
             _toggleShoe[item].GetComponentInChildren<Text>().text = "exist";
-            SelectedShoe = item;
             PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
+            PlayerPrefsX.SetIntArray("UnlockShoe", unlockShoes.ToArray());
             _buyThisPanel.SetActive(false);
         });
         _cancelButton.onClick.AddListener(() =>

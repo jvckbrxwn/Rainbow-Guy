@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class PowerUpsController : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class PowerUpsController : MonoBehaviour
     [SerializeField] private Sprite[] _sprites;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Collider2D _collider2D;
+    [SerializeField] private GameObject _flashlightPanel;
     private bool isHighJump = false, isDeadly = false;
     private int low = 0;
     private PlayerController _playerControl;
+    private ClothesManager _clothesManager;
 
     void Awake()
     {
@@ -20,6 +23,7 @@ public class PowerUpsController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider2D = GetComponent<Collider2D>();
         _playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _clothesManager = FindObjectOfType<ClothesManager>();
     }
 
     void Update()
@@ -42,7 +46,34 @@ public class PowerUpsController : MonoBehaviour
                 HighJumpPU(other);
             if (other.tag == "PowerUpDeadly")
                 DeadlyPU(other);
+            if (other.tag == "PowerUpFalshLightPlatform")
+            {
+                _flashlightPanel.GetComponent<CanvasRenderer>().SetAlpha(0.01f);
+                FlashlightPU(other.gameObject, 1f, 0.5f, true);
+            }
+            if (other.tag == "PowerUpFlashlight")
+            {
+                FlashlightPU(other.gameObject, 0.5f, 0.5f, true);
+            }
+            if (other.tag == "PowerUpFlashlightOffPlatform")
+            {
+                FlashlightPU(other.gameObject, 0f, 0.5f, true, false, 0.5f);
+            }
         }
+    }
+
+    private void FlashlightPU(GameObject other, float fade, float time, bool ignoreTimeScale,
+        bool activePanel = true, float offTime = 0f)
+    {
+        StartCoroutine(OffFlashLightPanel(activePanel, offTime));
+        _flashlightPanel.GetComponent<Image>().CrossFadeAlpha(fade, time, ignoreTimeScale);
+        Destroy(other);
+    }
+
+    IEnumerator OffFlashLightPanel(bool activePanel, float time)
+    {
+        yield return new WaitForSeconds(time);
+        _flashlightPanel.SetActive(activePanel);
     }
 
     private void DeadlyPU(Collider2D other)
@@ -58,6 +89,10 @@ public class PowerUpsController : MonoBehaviour
     private void FlyPU(Collider2D other)
     {
         StopAllCoroutines(); PowerUpAction(PowerUpState.fly); Destroy(other.gameObject); ChangeSprite(_sprites[0]);
+        for (int i = 0; i < _clothesManager._playerSprites.Length; i++)
+        {
+            _clothesManager._playerSprites[i].enabled = false;
+        }
     }
 
     IEnumerator ChangeSpriteBack(Sprite sprite)
@@ -92,6 +127,10 @@ public class PowerUpsController : MonoBehaviour
         yield return new WaitForSeconds(5f);
         isFlying = false;
         _playerControl.gameObject.tag = "Player";
+        for (int i = 0; i < _clothesManager._playerSprites.Length; i++)
+        {
+            _clothesManager._playerSprites[i].enabled = true;
+        }
         StopCoroutine(FlyPowerUp());
     }
 

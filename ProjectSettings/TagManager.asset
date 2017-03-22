@@ -23,6 +23,9 @@ TagManager:
   - HatsPanel
   - JacketsPanel
   - ShoesPanel
+  - FlashlightPanel
+  - PowerUpFalshLightPlatform
+  - PowerUpFlashlightOffPlatform
   layers:
   - Default
   - TransparentFX
