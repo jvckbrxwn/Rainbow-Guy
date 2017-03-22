@@ -68,19 +68,34 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Move Control
+    Vector3 prevLoc = Vector3.zero;
     void AccelerationMove(bool agreed)
     {
         if (agreed)
         {
-            transform.Translate(Input.acceleration.x * 0.3f, 0, 0);
-            if (Input.acceleration.x > 0.01f)
+            transform.Translate(Input.acceleration.normalized.x * 15f * Time.deltaTime, 0, 0);
+            var localVel = transform.InverseTransformDirection(GetComponent<Rigidbody2D>().velocity);
+            //Debug.Log(localVel);
+            //if (GetComponent<Rigidbody2D>().velocity.x > 0)
+            //{
+            //    Debug.Log("FLIPX TRUE");
+            //    FlipX(true);
+            //}
+            //if (GetComponent<Rigidbody2D>().velocity.x < 0)
+            //{
+            //    Debug.Log("FLIPX FALSE");
+            //    FlipX(false);
+            //}
+            Vector3 curVel = (transform.position - prevLoc) / Time.deltaTime;
+            if (curVel.x > 0)
             {
                 FlipX(true);
             }
-            if (Input.acceleration.x < 0.01f)
+            else
             {
                 FlipX(false);
             }
+            prevLoc = transform.position;
         }
     }
 
