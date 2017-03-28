@@ -73,19 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (agreed)
         {
-            transform.Translate(Input.acceleration.normalized.x * 15f * Time.deltaTime, 0, 0);
-            var localVel = transform.InverseTransformDirection(GetComponent<Rigidbody2D>().velocity);
-            //Debug.Log(localVel);
-            //if (GetComponent<Rigidbody2D>().velocity.x > 0)
-            //{
-            //    Debug.Log("FLIPX TRUE");
-            //    FlipX(true);
-            //}
-            //if (GetComponent<Rigidbody2D>().velocity.x < 0)
-            //{
-            //    Debug.Log("FLIPX FALSE");
-            //    FlipX(false);
-            //}
+            transform.Translate(Input.acceleration.normalized.x * 15f * Time.deltaTime, 0f, 0f);
             Vector3 curVel = (transform.position - prevLoc) / Time.deltaTime;
             if (curVel.x > 0)
             {

@@ -47,24 +47,19 @@ public class PowerUpsController : MonoBehaviour
             if (other.tag == "PowerUpDeadly")
                 DeadlyPU(other);
             if (other.tag == "PowerUpFalshLightPlatform")
-            {
-                _flashlightPanel.GetComponent<CanvasRenderer>().SetAlpha(0.01f);
                 FlashlightPU(other.gameObject, 1f, 0.5f, true);
-            }
             if (other.tag == "PowerUpFlashlight")
-            {
                 FlashlightPU(other.gameObject, 0.5f, 0.5f, true);
-            }
-            if (other.tag == "PowerUpFlashlightOffPlatform")
-            {
+            if (other.tag == "PowerUpFlashlightOff")
                 FlashlightPU(other.gameObject, 0f, 0.5f, true, false, 0.5f);
-            }
         }
     }
 
     private void FlashlightPU(GameObject other, float fade, float time, bool ignoreTimeScale,
         bool activePanel = true, float offTime = 0f)
     {
+        if (other.tag == "PowerUpFalshLightPlatform")
+            _flashlightPanel.GetComponent<CanvasRenderer>().SetAlpha(0.01f);
         StartCoroutine(OffFlashLightPanel(activePanel, offTime));
         _flashlightPanel.GetComponent<Image>().CrossFadeAlpha(fade, time, ignoreTimeScale);
         Destroy(other);

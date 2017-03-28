@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Assets.SimpleAndroidNotifications;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class UIMenuController : MonoBehaviour {
 
-    [SerializeField] private GameObject _settingsPanel, _settingsPanelChild, _shopPanel;
+    [SerializeField] private GameObject _settingsPanel, _settingsPanelChild, _shopPanel, 
+        _leadachevPanel, _leadachevPanelChild;
     private SoundManager _soundManager;
 
     // Use this for initialization
     void Start() {
         Init();
+        LoginIn();
     }
 
     private void Init()
     {
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.DebugLogEnabled = false;
+        PlayGamesPlatform.Activate();
         _soundManager = FindObjectOfType<SoundManager>();
         _soundManager.Init();
     }
@@ -26,20 +31,61 @@ public class UIMenuController : MonoBehaviour {
 
     }
 
-    #region Open
-    public void OpenShop()
-    {
-        _shopPanel.SetActive(true);
-    }
-
+    #region GooglePlay
     public void OpenAchivements()
     {
-
+        if (Social.localUser.authenticated)
+        {
+            Social.ShowAchievementsUI();
+        }
+        else
+        {
+            Social.localUser.Authenticate((bool success) => {
+                if (success)
+                {
+                    Social.ShowAchievementsUI();
+                }
+            });
+        }
     }
 
     public void OpenLeaderboard()
     {
+        if (Social.localUser.authenticated)
+        {
+            Social.ShowLeaderboardUI();
+        }
+        else
+        {
+            Social.localUser.Authenticate((bool success) => {
+                if (success)
+                {
+                    Social.ShowLeaderboardUI();
+                }
+            });
+        }
+    }
 
+    public void LoginIn()
+    {
+        Social.localUser.Authenticate((bool success) =>
+        {
+
+        });
+    }
+
+    public void LoginOut()
+    {
+        if (Social.localUser.authenticated)
+            PlayGamesPlatform.Instance.SignOut();
+    }
+
+    #endregion
+
+    #region Open Panels
+    public void OpenShop()
+    {
+        _shopPanel.SetActive(true);
     }
 
     public void OpenSettings()
@@ -47,22 +93,23 @@ public class UIMenuController : MonoBehaviour {
         _settingsPanel.SetActive(true);
         AnimationObjectOn(_settingsPanel, _settingsPanelChild);
     }
+
+    public void OpenLeadAcheve()
+    {
+        _leadachevPanel.SetActive(true);
+        AnimationObjectOn(_leadachevPanel, _leadachevPanelChild);
+    }
     #endregion
 
-    #region Close
+    #region Close Panels
     public void CloseShop()
     {
         _shopPanel.SetActive(false);
     }
 
-    public void CloseAchivements()
+    public void CloseLeadAcive()
     {
-
-    }
-
-    public void CloseLeaderboard()
-    {
-
+        AnimationObjectOut(_leadachevPanel, _leadachevPanelChild);
     }
 
     public void CloseSettings()
