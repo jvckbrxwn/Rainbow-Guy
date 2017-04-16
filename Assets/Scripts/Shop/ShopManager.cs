@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class ShopManager : MonoBehaviour {
 
@@ -51,7 +53,11 @@ public class ShopManager : MonoBehaviour {
     #region Hats
     public void BuyHatOne(int item)
     {
-        UnlockHat(item);
+        if (_toggleHats[item].isOn)
+        {
+            UnlockHat(item);
+            Debug.Log("Clicked: ");
+        }
     }
 
     private void GetHats()
@@ -84,23 +90,27 @@ public class ShopManager : MonoBehaviour {
     private void OpenBuyThisHat(int item)
     {
         _buyImage.sprite = _toggleHats[item].GetComponent<Image>().sprite;
-        _buyCostText.text = "it costs " +_price+ " coins";
+        _buyCostText.text = "it costs " +Price+ " coins";
         _buyThisPanel.SetActive(true);
         _applyButton.onClick.AddListener(() =>
         {
             unlockHats.Add(item);
             PlayerPrefsX.SetIntArray("UnlockHat", unlockHats.ToArray());
-            CoinsManager.SetCoins(-_price);
+            CoinsManager.SetCoins(-Price);
             UpdateTextCoins();
             SelectedHat = item;
             PlayerPrefs.SetInt("SelectedHat", SelectedHat);
             _toggleHats[item].GetComponentInChildren<Text>().text = "exist";
             _buyThisPanel.SetActive(false);
+            Debug.Log(Price);
+            _applyButton.onClick.RemoveAllListeners();
         });
+        _cancelButton.onClick.RemoveAllListeners();
         _cancelButton.onClick.AddListener(() =>
         {
             GetHatIsOn();
             _buyThisPanel.SetActive(false);
+            _cancelButton.onClick.RemoveAllListeners();
         });
     }
     #endregion
@@ -142,13 +152,13 @@ public class ShopManager : MonoBehaviour {
     private void OpenBuyThisJacket(int item)
     {
         _buyImage.sprite = _toggleJacket[item].GetComponent<Image>().sprite;
-        _buyCostText.text = "it costs " + _price + " coins";
+        _buyCostText.text = "it costs " + Price + " coins";
         _buyThisPanel.SetActive(true);
         _applyButton.onClick.AddListener(() =>
         {
             unlockJackets.Add(item);
             PlayerPrefsX.SetIntArray("UnlockJacket", unlockJackets.ToArray());
-            CoinsManager.SetCoins(-_price);
+            CoinsManager.SetCoins(-Price);
             UpdateTextCoins();
             _toggleJacket[item].GetComponentInChildren<Text>().text = "exist";
             SelectedJacket = item;
@@ -200,13 +210,13 @@ public class ShopManager : MonoBehaviour {
     private void OpenBuyThisShoe(int item)
     {
         _buyImage.sprite = _toggleShoe[item].GetComponent<Image>().sprite;
-        _buyCostText.text = "it costs " + _price + " coins";
+        _buyCostText.text = "it costs " + Price + " coins";
         _buyThisPanel.SetActive(true);
         _applyButton.onClick.AddListener(() =>
         {
             unlockShoes.Add(item);
             SelectedShoe = item;
-            CoinsManager.SetCoins(-_price);
+            CoinsManager.SetCoins(-Price);
             UpdateTextCoins();
             _toggleShoe[item].GetComponentInChildren<Text>().text = "exist";
             PlayerPrefs.SetInt("SelectedShoe", SelectedShoe);
@@ -316,11 +326,15 @@ public class ShopManager : MonoBehaviour {
         }
     }
 
-    public int SetPrice
+    public int Price
     {
         set
         {
             _price = value;
+        }
+        get
+        {
+            return _price;
         }
     }
     #endregion

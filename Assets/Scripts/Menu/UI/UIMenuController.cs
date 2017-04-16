@@ -10,7 +10,6 @@ public class UIMenuController : MonoBehaviour {
         _leadachevPanel, _leadachevPanelChild;
     private SoundManager _soundManager;
 
-    // Use this for initialization
     void Start() {
         Init();
         LoginIn();
@@ -18,17 +17,14 @@ public class UIMenuController : MonoBehaviour {
 
     private void Init()
     {
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+	.EnableSavedGames()
+	.Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = false;
         PlayGamesPlatform.Activate();
         _soundManager = FindObjectOfType<SoundManager>();
         _soundManager.Init();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     #region GooglePlay
@@ -70,7 +66,7 @@ public class UIMenuController : MonoBehaviour {
     {
         Social.localUser.Authenticate((bool success) =>
         {
-
+		//Считать данные с облака, вмысле скор (хотя я подумал, и не знаю зачем сохранять данные на облако)
         });
     }
 

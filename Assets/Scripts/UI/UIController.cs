@@ -9,12 +9,15 @@ public class UIController : MonoBehaviour
 {
 	[SerializeField] private Button _pauseButton;
 	[SerializeField] private GameObject _pausePanel, _gameOverPanel, _pauseChildrenPanel, _gameOverChildrenPanel;
-	[SerializeField] private PlayerController _playerController;    
+	[SerializeField] private PlayerController _playerController;
+    [SerializeField] private Text _highscore;
+    private CameraFollowScript _cameraFollowScript;
 
 	void Start()
 	{
         Time.timeScale = 1f;
         _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _cameraFollowScript = FindObjectOfType<CameraFollowScript>();
 	}
 
 	void Update() {
@@ -43,6 +46,8 @@ public class UIController : MonoBehaviour
         _playerController.isAccelerationMove = false;
         _playerController.isAlive = false;
         _gameOverPanel.SetActive(true);
+        _highscore.text += _cameraFollowScript.Highscore;
+        _cameraFollowScript.SetScoreToGooglePlay();
         AnimationGameOverOn();
     }
 
