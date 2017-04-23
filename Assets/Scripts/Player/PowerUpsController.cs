@@ -16,6 +16,7 @@ public class PowerUpsController : MonoBehaviour
     private int low = 0;
     private PlayerController _playerControl;
     private ClothesManager _clothesManager;
+    private SoundManager _soundManager;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class PowerUpsController : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
         _playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _clothesManager = FindObjectOfType<ClothesManager>();
+        _soundManager = FindObjectOfType<SoundManager>();
     }
 
     void Update()
@@ -46,12 +48,29 @@ public class PowerUpsController : MonoBehaviour
                 HighJumpPU(other);
             if (other.tag == "PowerUpDeadly")
                 DeadlyPU(other);
-            if (other.tag == "PowerUpFalshLightPlatform")
-                FlashlightPU(other.gameObject, 1f, 0.5f, true);
-            if (other.tag == "PowerUpFlashlight")
-                FlashlightPU(other.gameObject, 0.5f, 0.5f, true);
-            if (other.tag == "PowerUpFlashlightOff")
-                FlashlightPU(other.gameObject, 0f, 0.5f, true, false, 0.5f);
+            FlashlightRoomCollision(other);
+        }
+        ///mb gavnokod
+        if (gameObject.tag == "FlyPlayer")
+        {
+            FlashlightRoomCollision(other);
+        }
+    }
+
+    private void FlashlightRoomCollision(Collider2D other)
+    {
+        if (other.tag == "PowerUpFalshLightPlatform")
+        {
+            _soundManager.FlashlightOffOn();
+            FlashlightPU(other.gameObject, 1f, 0.2f, true);
+            Destroy(other.gameObject);
+        }
+        if (other.tag == "PowerUpFlashlight")
+            FlashlightPU(other.gameObject, 0.5f, 0.2f, true);
+        if (other.tag == "PowerUpFlashlightOff")
+        {
+            _soundManager.FlashlightOffOn();
+            FlashlightPU(other.gameObject, 0f, 0.2f, true, false, 0.2f);
         }
     }
 
@@ -79,6 +98,7 @@ public class PowerUpsController : MonoBehaviour
     private void HighJumpPU(Collider2D other)
     {
         StopAllCoroutines(); PowerUpAction(PowerUpState.high_jump); Destroy(other.gameObject); ChangeSprite(_sprites[1]);
+        _clothesManager._playerSprites[2].enabled = false;
     }
 
     private void FlyPU(Collider2D other)
@@ -102,6 +122,7 @@ public class PowerUpsController : MonoBehaviour
         yield return new WaitForSeconds(5f);
         _playerControl.JumpSpeed = 8.5f;
         isHighJump = false;
+        _clothesManager._playerSprites[2].enabled = true;
         StopCoroutine(HighJumpPowerUp());
     }
 

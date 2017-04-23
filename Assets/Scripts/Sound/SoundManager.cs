@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _mainMusic;
     [SerializeField] private AudioSource _powerUpSound;
     [SerializeField] private AudioSource _deathSound;
+    [SerializeField] private AudioSource _flashlightSound;
 
     [SerializeField] private AudioClip _redPlatformSoundClip;
 
@@ -29,8 +30,11 @@ public class SoundManager : MonoBehaviour
 	#region publicFunctions
 	public void OnLevelWasLoaded(int level)
 	{
-		if(level == 1)
-			_mainMusic.mute = true;
+        if (level == 1)
+        {
+            _mainMusic.mute = true;
+            _deathSound.mute = false;
+        }
 	}
 
     public void Init() {
@@ -104,6 +108,12 @@ public class SoundManager : MonoBehaviour
     {
         _deathSound.volume = soundVolume;
         _deathSound.Play();
+    }
+
+    public void FlashlightOffOn()
+    {
+        _flashlightSound.volume = soundVolume;
+        _flashlightSound.Play();
     }
 
 	public void SaveSoundStatus(bool isSoundOn)

@@ -18,8 +18,8 @@ public class UIMenuController : MonoBehaviour {
     private void Init()
     {
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-	.EnableSavedGames()
-	.Build();
+            .EnableSavedGames()
+            .Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = false;
         PlayGamesPlatform.Activate();
@@ -49,14 +49,14 @@ public class UIMenuController : MonoBehaviour {
     {
         if (Social.localUser.authenticated)
         {
-            Social.ShowLeaderboardUI();
+            PlayGamesPlatform.Instance.ShowLeaderboardUI(rainbowGuyResources.leaderboard_scores);
         }
         else
         {
             Social.localUser.Authenticate((bool success) => {
                 if (success)
                 {
-                    Social.ShowLeaderboardUI();
+                    PlayGamesPlatform.Instance.ShowLeaderboardUI(rainbowGuyResources.leaderboard_scores);
                 }
             });
         }
@@ -66,7 +66,7 @@ public class UIMenuController : MonoBehaviour {
     {
         Social.localUser.Authenticate((bool success) =>
         {
-		//Считать данные с облака, вмысле скор (хотя я подумал, и не знаю зачем сохранять данные на облако)
+		    //Считать данные с облака, вмысле скор (хотя я подумал, и не знаю зачем сохранять данные на облако)
         });
     }
 

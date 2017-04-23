@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _playerSpriteRenderer;
     private PowerUpsController _powerUpController;
     private ClothesManager _cloth;
+    private SoundManager _soundManager;
 
     public bool isAccelerationMove, isHalfScreenMove, isCompMove, isAlive;
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _powerUpController = GetComponent<PowerUpsController>();
         _cloth = GetComponent<ClothesManager>();
+        _soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Use this for initialization
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DieInBlackHole()
     {
+        isAccelerationMove = isCompMove = isHalfScreenMove = false;
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
         LeanTween.rotateZ(gameObject, 700f, 0.5f);
@@ -139,6 +142,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        isAccelerationMove = isCompMove = isHalfScreenMove = false;
+        _soundManager.DeathSoundPlay();
         _uiControl.onGameOver();
     }
 

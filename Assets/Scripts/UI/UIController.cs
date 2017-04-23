@@ -2,8 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using Assets.SimpleAndroidNotifications;
-using System;
 
 public class UIController : MonoBehaviour
 {
@@ -13,12 +11,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text _highscore;
     private CameraFollowScript _cameraFollowScript;
 
-	void Start()
-	{
+    void Start()
+    {
         Time.timeScale = 1f;
         _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _cameraFollowScript = FindObjectOfType<CameraFollowScript>();
-	}
+    }
 
 	void Update() {
 		if(_pausePanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
@@ -46,7 +44,7 @@ public class UIController : MonoBehaviour
         _playerController.isAccelerationMove = false;
         _playerController.isAlive = false;
         _gameOverPanel.SetActive(true);
-        _highscore.text += _cameraFollowScript.Highscore;
+        _highscore.text = "Your highscore: " + _cameraFollowScript.Highscore;
         _cameraFollowScript.SetScoreToGooglePlay();
         AnimationGameOverOn();
     }

@@ -356,7 +356,7 @@ namespace GooglePlayGames.Editor
             if (!string.IsNullOrEmpty(packageName))
             {
                 if (string.IsNullOrEmpty(currentId) ||
-                    currentId == "com.kk54.rainbowguy")
+                    currentId == "com.Company.ProductName")
                 {
                     PlayerSettings.applicationIdentifier = packageName;
                 }
