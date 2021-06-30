@@ -1,5 +1,5 @@
-lastUpgrade=00936
-proj.pluginVersion=0.9.36
+lastUpgrade=01012
+proj.pluginVersion=0.10.12
 proj.AppId=549114306002
 proj.classDir=Assets
 proj.ConstantsClassName=rainbowGuyResources
