@@ -45,7 +45,8 @@ public class UIController : MonoBehaviour
         _playerController.isAlive = false;
         _gameOverPanel.SetActive(true);
         _highscore.text = "Your highscore: " + _cameraFollowScript.Highscore;
-        _cameraFollowScript.SetScoreToGooglePlay();
+        //TODO: create service to report score to social 
+        //_cameraFollowScript.SetScoreToGooglePlay();
         AnimationGameOverOn();
     }
 
