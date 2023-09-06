@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae8675a1f7e4b6b82ed2b4aed92040c, type: 3}
+  m_Name: Jackets
+  m_EditorClassIdentifier: 
+  items:
+  - name: Yellow One
+    price: 200
+    sprite: {fileID: 21300000, guid: 93b8a011f11643b42bbb25ebd9b88e3a, type: 3}
+    isExist: 0
+  - name: Purple One
+    price: 200
+    sprite: {fileID: 21300000, guid: 1824de8eac8d58546bd84510329d8f20, type: 3}
+    isExist: 0
+  - name: Green One
+    price: 200
+    sprite: {fileID: 21300000, guid: 5e1de001409e65b41880484cf196ece8, type: 3}
+    isExist: 0
+  - name: Black One
+    price: 200
+    sprite: {fileID: 21300000, guid: a1e0c5a965aff174880033044583261c, type: 3}
+    isExist: 0
+  - name: Blue One
+    price: 200
+    sprite: {fileID: 21300000, guid: 7d3f4677742766f42a2e655111b6160d, type: 3}
+    isExist: 0

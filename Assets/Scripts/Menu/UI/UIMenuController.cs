@@ -95,13 +95,11 @@ public class UIMenuController : MonoBehaviour
 	public void OpenSettings()
 	{
 		_settingsPanel.SetActive(true);
-		AnimationObjectOn(_settingsPanel, _settingsPanelChild);
 	}
 
 	public void OpenLeadAcheve()
 	{
 		_leadachevPanel.SetActive(true);
-		AnimationObjectOn(_leadachevPanel, _leadachevPanelChild);
 	}
 
 #endregion
@@ -113,42 +111,15 @@ public class UIMenuController : MonoBehaviour
 		_shopPanel.SetActive(false);
 	}
 
-	public void CloseLeadAcive()
+	public void CloseLeadActive()
 	{
-		AnimationObjectOut(_leadachevPanel, _leadachevPanelChild);
+		_leadachevPanel.SetActive(false);
 	}
 
 	public void CloseSettings()
 	{
-		AnimationObjectOut(_settingsPanel, _settingsPanelChild);
+		_settingsPanel.SetActive(false);
 	}
 
 #endregion
-
-#region Animation
-
-	void AnimationObjectOn(GameObject mainGO, GameObject panelGO)
-	{
-		mainGO.GetComponent<CanvasRenderer>().SetAlpha(0.01f);
-		mainGO.GetComponent<Image>().CrossFadeAlpha(1f, 0.5f, true);
-		panelGO.transform.position = new Vector2(0, mainGO.transform.position.y - 10f);
-		LeanTween.move(panelGO, new Vector2(0, mainGO.transform.position.y), .5f).setEase(LeanTweenType.easeInOutSine)
-			.setIgnoreTimeScale(true);
-	}
-
-	void AnimationObjectOut(GameObject mainGO, GameObject panelGO)
-	{
-		mainGO.GetComponent<Image>().CrossFadeAlpha(0f, 0.5f, true);
-		LeanTween.move(panelGO, new Vector2(0, mainGO.transform.position.y + 10f), .5f).setEase(LeanTweenType.easeInOutSine)
-			.setIgnoreTimeScale(true);
-		StartCoroutine(WaitASec(mainGO));
-	}
-
-	IEnumerator WaitASec(GameObject go)
-	{
-		yield return new WaitForSeconds(.5f);
-		go.SetActive(false);
-	}
-
-#endregion Animations
 }
