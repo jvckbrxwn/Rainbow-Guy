@@ -15,6 +15,7 @@ public class UIMenuController : MonoBehaviour
 
 	void Start()
 	{
+		Application.targetFrameRate = 60;
 		Init();
 		LoginIn();
 	}

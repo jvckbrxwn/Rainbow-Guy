@@ -20,5 +20,14 @@ namespace Shop.Panels.Abstract
 		{
 			Init();
 		}
+
+		//TODO: create pool to reuse items
+		protected void OnDisable()
+		{
+			foreach (Transform item in gridLayout.transform)
+			{
+				Destroy(item.gameObject);
+			}
+		}
 	}
 }
