@@ -1,6 +1,9 @@
 ﻿using System.Collections;
+using Managers.UI.Interfaces;
+using UI.Views;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 #if UNITY_ANDROID
 using GooglePlayGames;
@@ -8,6 +11,9 @@ using GooglePlayGames;
 
 public class UIMenuController : MonoBehaviour
 {
+	[Inject]
+	private IUIManager uiManager;
+
 	[SerializeField] private GameObject _settingsPanel, _settingsPanelChild, _shopPanel,
 		_leadachevPanel, _leadachevPanelChild;
 
@@ -80,10 +86,7 @@ public class UIMenuController : MonoBehaviour
 
 	public void LoginIn()
 	{
-		Social.localUser.Authenticate((bool success) =>
-		{
-			//Считать данные с облака, вмысле скор (хотя я подумал, и не знаю зачем сохранять данные на облако)
-		});
+		Social.localUser.Authenticate( _ => { });
 	}
 
 	public void LogOut()
@@ -102,12 +105,7 @@ public class UIMenuController : MonoBehaviour
 
 	public void OpenSettings()
 	{
-		_settingsPanel.SetActive(true);
-	}
-
-	public void OpenLeadAcheve()
-	{
-		_leadachevPanel.SetActive(true);
+		uiManager.Show<SettingsUIView>("Settings");
 	}
 
 #endregion
@@ -117,16 +115,6 @@ public class UIMenuController : MonoBehaviour
 	public void CloseShop()
 	{
 		_shopPanel.SetActive(false);
-	}
-
-	public void CloseLeadActive()
-	{
-		_leadachevPanel.SetActive(false);
-	}
-
-	public void CloseSettings()
-	{
-		_settingsPanel.SetActive(false);
 	}
 
 #endregion

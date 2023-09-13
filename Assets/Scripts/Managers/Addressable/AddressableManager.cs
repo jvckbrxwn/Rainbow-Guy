@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Managers.Base;
 using Managers.Interfaces;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -10,9 +11,10 @@ namespace Managers
 	{
 		public async UniTask<T> GetObject<T>(string key)
 		{
-			AsyncOperationHandle<T> asyncOperationHandle = Addressables.LoadAssetAsync<T>(key);
-			T obj = await asyncOperationHandle.Task;
-			return obj;
+			AsyncOperationHandle<GameObject> asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>(key);
+			GameObject obj = await asyncOperationHandle.Task;
+			obj.TryGetComponent(out T component);
+			return component;
 		}
 	}
 }

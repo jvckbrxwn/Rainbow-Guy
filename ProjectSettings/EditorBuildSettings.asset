@@ -7,7 +7,13 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/SimpleAndroidNotifications/DemoScene.unity
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Scenes/MenuScene.unity
+    guid: 6b945f3685a5d0348ba76fb26ce98b9e
   - enabled: 1
     path: Assets/_Scenes/GameScene.unity
+    guid: 4f5405bcd20ba3d4f96d91a98fb2b21c
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 0b071f0a15ace49b0b7d04daf8d3da48,
+      type: 2}
