@@ -55,6 +55,8 @@ public class UIMenuController : MonoBehaviour
 		{
 #if UNITY_ANDROID
 			PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard_high_score);
+#else
+			Social.ShowLeaderboardUI();
 #endif
 		}
 		else
@@ -65,6 +67,11 @@ public class UIMenuController : MonoBehaviour
 				if (success)
 				{
 					PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard_high_score);
+				}
+#else
+				if (success)
+				{
+					Social.ShowLeaderboardUI();
 				}
 #endif
 			});
