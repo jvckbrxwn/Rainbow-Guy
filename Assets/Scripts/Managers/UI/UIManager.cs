@@ -1,23 +1,30 @@
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using Managers.UI.Interfaces;
 using Managers.Base;
-using Managers.Interfaces;
-using UI.Views.Abstract;
+using Controllers;
+using Controllers.Abstract;
+using UnityEngine;
+using Zenject;
 
 namespace Managers.UI
 {
-	public class UIManager : BaseManager, IUIManager
+	public class UIManager : BaseMonoManager, IUIManager
 	{
-		private readonly IAddressableManager addressableManager;
+		[SerializeField] private Transform parent;
+		[SerializeField] private Transform viewsParent;
 
-		protected UIManager(IAddressableManager addressableManager)
+		[Inject] private IUIController[] uiControllers;
+
+		private async void Start()
 		{
-			this.addressableManager = addressableManager;
+			Debug.Log(uiControllers.Length);
+			await Show<MenuUIController>();
 		}
 
-		public async void Show<T>(string key) where T : BaseUIView
+		public async UniTask Show<T>()
 		{
-			T view = await addressableManager.GetObject<T>(key);
-			view.Show();
+			await uiControllers.First(x => x.GetType() == typeof(T)).Show(viewsParent);
 		}
 	}
 }

@@ -1,9 +1,9 @@
-using UI.Views.Abstract;
+using Cysharp.Threading.Tasks;
 
 namespace Managers.UI.Interfaces
 {
 	public interface IUIManager
 	{
-		void Show<T>(string key) where T : BaseUIView;
+		UniTask Show<T>();
 	}
 }
