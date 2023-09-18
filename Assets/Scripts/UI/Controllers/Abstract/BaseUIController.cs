@@ -20,7 +20,11 @@ namespace Controllers.Abstract
 
 		public virtual async UniTask Show(Transform parent)
 		{
-			View = await addressableManager.InstantiateObject<T>(key, parent);
+			if (!View)
+			{
+				View = await addressableManager.InstantiateObject<T>(key, parent);
+			}
+
 			View.Show();
 		}
 

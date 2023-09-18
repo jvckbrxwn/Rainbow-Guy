@@ -13,7 +13,7 @@ namespace UI.Views
 		[SerializeField] private Button button;
 		[SerializeField] private BaseViewController shopController;
 
-		public event Action<BaseViewController> ViewWasOpened;
+		public event Action<IShopController> ViewWasOpened;
 
 		public BaseViewController ShopController => shopController;
 
@@ -32,8 +32,8 @@ namespace UI.Views
 	{
 		[SerializeField] private List<ShopViewHolder> shopViewsHolder;
 
-		private IShopController previousShopController;
-
+		public event Action<IShopController> ShopViewWasOpened; 
+		
 		public override void Show()
 		{
 			gameObject.SetActive(true);
@@ -58,11 +58,9 @@ namespace UI.Views
 			});
 		}
 
-		private void OnViewWasOpened(BaseViewController viewController)
+		private void OnViewWasOpened(IShopController viewController)
 		{
-			previousShopController?.Hide();
-			previousShopController = viewController;
-			previousShopController.Show();
+			ShopViewWasOpened?.Invoke(viewController);
 		}
 	}
 }
