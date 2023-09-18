@@ -18,7 +18,6 @@ namespace Managers.UI
 
 		private async void Start()
 		{
-			Debug.Log(uiControllers.Length);
 			await Show<MenuUIController>();
 		}
 

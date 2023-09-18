@@ -10,16 +10,16 @@ namespace UI.Views
 		[SerializeField] private Button shopButton;
 		[SerializeField] private Button settingsButton;
 		[SerializeField] private Button achievementsButton;
+		[SerializeField] private Button playButton;
 
 		public event Action ShopClicked;
 		public event Action SettingsClicked;
 		public event Action AchievementsClicked;
+		public event Action PlayClicked;
 
-		private void Awake()
+		private void OnPlayClicked()
 		{
-			shopButton.onClick.AddListener(OnShopClicked);
-			settingsButton.onClick.AddListener(OnSettingsClicked);
-			achievementsButton.onClick.AddListener(OnAchievementsClicked);
+			PlayClicked?.Invoke();
 		}
 
 		private void OnAchievementsClicked()
@@ -44,5 +44,13 @@ namespace UI.Views
 
 		public override void Hide()
 		{ }
+
+		protected override void Init()
+		{
+			shopButton.onClick.AddListener(OnShopClicked);
+			settingsButton.onClick.AddListener(OnSettingsClicked);
+			achievementsButton.onClick.AddListener(OnAchievementsClicked);
+			playButton.onClick.AddListener(OnPlayClicked);
+		}
 	}
 }

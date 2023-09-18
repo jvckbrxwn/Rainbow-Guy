@@ -1,10 +1,22 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Shop.Panels.Abstract
 {
-	public abstract class BaseShopController<T> : MonoBehaviour
+	public abstract class BaseViewController : MonoBehaviour, IShopController
+	{
+		protected abstract void Init();
+
+		protected virtual void Awake()
+		{
+			Init();
+		}
+
+		public abstract void Show();
+		public abstract void Hide();
+	}
+
+	public abstract class BaseViewShopController<T> : BaseViewController
 	{
 		[SerializeField] private GridLayoutGroup gridLayout;
 		[SerializeField] private BaseShopViewItem shopViewItem;
@@ -14,20 +26,20 @@ namespace Shop.Panels.Abstract
 		protected GridLayoutGroup ParentLayout => gridLayout;
 		protected BaseShopViewItem ShopViewItem => shopViewItem;
 
-		public abstract void Init();
-
-		protected void OnEnable()
+		public override void Show()
 		{
-			Init();
+			gameObject.SetActive(true);
 		}
 
-		//TODO: create pool to reuse items
-		protected void OnDisable()
+		public override void Hide()
 		{
-			foreach (Transform item in gridLayout.transform)
-			{
-				Destroy(item.gameObject);
-			}
+			gameObject.SetActive(false);
 		}
+	}
+
+	public interface IShopController
+	{
+		void Show();
+		void Hide();
 	}
 }

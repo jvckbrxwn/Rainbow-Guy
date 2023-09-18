@@ -134,6 +134,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  shopViewsHolder:
+  - type: 0
+    button: {fileID: 8475610281593367949}
+    shopController: {fileID: 7051153925311601733}
+  - type: 1
+    button: {fileID: 8997872089983018060}
+    shopController: {fileID: 8287454412565217917}
+  - type: 2
+    button: {fileID: 5817958218677624334}
+    shopController: {fileID: 7445784613335418387}
 --- !u!1 &257130669383727637
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,7 +957,7 @@ GameObject:
   - component: {fileID: 3140360746795879233}
   - component: {fileID: 8475610281593367949}
   m_Layer: 5
-  m_Name: Caps
+  m_Name: Hats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1053,19 +1063,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3140360746795879233}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1402318881443481906}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OpenHats
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2202135287222186313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,38 +1188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1573450865301106384}
-  _hatsPanel: {fileID: 3044418139555340928}
-  _jacketsPanel: {fileID: 1429554737567279845}
-  _shoesPanel: {fileID: 7640841452650693838}
-  _hatToggleGroup: {fileID: 658066667381781208}
-  _jacketToggleGroup: {fileID: 1526953643660006309}
-  _shoeToggleGroup: {fileID: 907482791639426265}
-  _toggleHats:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _toggleJacket:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _toggleShoe:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _buyThisPanel: {fileID: 3235939639925176805}
-  _buyImage: {fileID: 807390153352566221}
-  _buyCostText: {fileID: 45336569578620559}
-  _applyButton: {fileID: 6162759403887696720}
-  _cancelButton: {fileID: 2212196596978365496}
 --- !u!1 &3044418139555340928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,19 +1559,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4084705112377973704}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1402318881443481906}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OpenJackets
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5011501087955039237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,16 +2543,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7443454943096527134}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1402318881443481906}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OpenShoes
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

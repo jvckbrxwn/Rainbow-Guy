@@ -2,9 +2,9 @@ using Shop.Panels.Abstract;
 
 namespace Shop.Panels.Hats
 {
-	public class HatsPanelController : BaseShopController<HatsContainer>
+	public class HatsPanelController : BaseViewShopController<HatsContainer>
 	{
-		public override void Init()
+		protected override void Init()
 		{
 			foreach (HatItem hatItem in Items.Items)
 			{

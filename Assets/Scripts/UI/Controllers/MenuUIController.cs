@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Managers.UI.Interfaces;
 using UI.Views;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Controllers
@@ -20,6 +21,7 @@ namespace Controllers
 			View.ShopClicked += OnShopClicked;
 			View.SettingsClicked += OnSettingsClicked;
 			View.AchievementsClicked += OnAchievementsClicked;
+			View.PlayClicked += OnPlayClicked;
 		}
 
 		public override async UniTask Hide()
@@ -43,6 +45,12 @@ namespace Controllers
 		private async void OnSettingsClicked()
 		{
 			await uiManager.Show<SettingsUIController>();
+		}
+		
+		//TODO: rework to inject scene
+		private async void OnPlayClicked()
+		{
+			await SceneManager.LoadSceneAsync("GameScene");
 		}
 	}
 }

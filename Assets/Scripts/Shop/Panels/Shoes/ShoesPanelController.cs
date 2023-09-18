@@ -2,9 +2,9 @@ using Shop.Panels.Abstract;
 
 namespace Shop.Panels.Shoes
 {
-	public class ShoesPanelController : BaseShopController<ShoesContainer>
+	public class ShoesPanelController : BaseViewShopController<ShoesContainer>
 	{
-		public override void Init()
+		protected override void Init()
 		{
 			foreach (ShoeItem shoeItem in Items.Items)
 			{

@@ -9,6 +9,11 @@ namespace UI.Views.Abstract
 		private static readonly int open = Animator.StringToHash("Open");
 		private static readonly int close = Animator.StringToHash("Close");
 
+		private void Start()
+		{
+			Init();
+		}
+		
 		public virtual void Show()
 		{
 			animator.SetTrigger(open);
@@ -18,5 +23,7 @@ namespace UI.Views.Abstract
 		{
 			animator.SetTrigger(close);
 		}
+
+		protected abstract void Init();
 	}
 }
