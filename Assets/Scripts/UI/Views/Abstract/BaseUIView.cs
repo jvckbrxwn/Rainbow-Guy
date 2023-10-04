@@ -13,15 +13,21 @@ namespace UI.Views.Abstract
 		{
 			Init();
 		}
-		
+
 		public virtual void Show()
 		{
+			gameObject.SetActive(true);
 			animator.SetTrigger(open);
 		}
 
 		public virtual void Hide()
 		{
 			animator.SetTrigger(close);
+		}
+
+		public virtual void Disable()
+		{
+			gameObject.SetActive(false);
 		}
 
 		protected abstract void Init();

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class SpawnerScript : MonoBehaviour
 {
-
 	[SerializeField] private GameObject[] itemsToSpawn;
+
 	//public List<GameObject> floors;
 	[HideInInspector] public float lastYPosition;
 
@@ -18,7 +18,7 @@ public class SpawnerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(lastYPosition < Camera.main.transform.position.y + Camera.main.orthographicSize)
+		if (lastYPosition < Camera.main.transform.position.y + Camera.main.orthographicSize)
 			Spawn();
 	}
 

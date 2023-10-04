@@ -22,7 +22,8 @@ namespace Controllers.Abstract
 		{
 			if (!View)
 			{
-				View = await addressableManager.InstantiateObject<T>(key, parent);
+				await RetrieveView(parent);
+				Init();
 			}
 
 			View.Show();
@@ -31,6 +32,14 @@ namespace Controllers.Abstract
 		public virtual async UniTask Hide()
 		{
 			View.Hide();
+		}
+
+		protected abstract void Init();
+
+		private async UniTask RetrieveView(Transform parent)
+		{
+			View = await addressableManager.InstantiateObject<T>(key, parent);
+			View.Disable();
 		}
 	}
 

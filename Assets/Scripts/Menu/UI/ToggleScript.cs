@@ -1,57 +1,59 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using System;
+using Managers.Sound.Interfaces;
+using UnityEngine.Serialization;
+using Zenject;
 
 [RequireComponent(typeof(Toggle))]
 public class ToggleScript : MonoBehaviour
 {
-	private SoundManager _soundManager;
-	public Sprite Inactive = null;
-	private Toggle _Toggle = null;
-	[SerializeField] private Image _Background = null;
-	private Sprite _BackgroundActive = null;
+	[Inject] private readonly ISoundManager soundManager;
 
-	void Start()
-	{
-		_soundManager = GameObject.FindObjectOfType<SoundManager>();
-		_Toggle = GetComponent<Toggle>();
-		_BackgroundActive = _Background.sprite;
-        if (gameObject.tag == "SoundButton")
-            _soundManager.InitSound(_Toggle);
-        if (gameObject.tag == "MusicButton")
-            _soundManager.InitMusic(_Toggle);
-	}
+	[SerializeField] private Sprite inactive;
+	[SerializeField] private Toggle toggle;
+	[SerializeField] private Image background;
 
-	public void ToggleSound()
-	{
-		if(_Toggle.isOn)
-		{
-			_soundManager.Sound(false);
-			_Background.sprite = _BackgroundActive;
-			_soundManager.SaveSoundStatus(true);
-		}
-		else
-		{
-			_soundManager.Sound(true);
-			_Background.sprite = Inactive;
-			_soundManager.SaveSoundStatus(false);
-		}
-	}
+	private Sprite backgroundActive;
 
-    public void ToggleMusic()
-    {
-        if (_Toggle.isOn)
-        {
-            _soundManager.Music(false);
-            _Background.sprite = _BackgroundActive;
-            _soundManager.SaveMusicStatus(true);
-        }
-        else
-        {
-            _soundManager.Music(true);
-            _Background.sprite = Inactive;
-            _soundManager.SaveMusicStatus(false);
-        }
-    }
+	// void Start()
+	// {
+	// 	toggle = GetComponent<Toggle>();
+	// 	backgroundActive = background.sprite;
+	// 	if (gameObject.tag == "SoundButton")
+	// 		soundManager.InitSound(toggle);
+	// 	if (gameObject.tag == "MusicButton")
+	// 		soundManager.InitMusic(toggle);
+	// }
+	//
+	// public void ToggleSound()
+	// {
+	// 	if (toggle.isOn)
+	// 	{
+	// 		soundManager.Sound(false);
+	// 		background.sprite = backgroundActive;
+	// 		soundManager.SaveSoundStatus(true);
+	// 	}
+	// 	else
+	// 	{
+	// 		soundManager.Sound(true);
+	// 		background.sprite = inactive;
+	// 		soundManager.SaveSoundStatus(false);
+	// 	}
+	// }
+	//
+	// public void ToggleMusic()
+	// {
+	// 	if (toggle.isOn)
+	// 	{
+	// 		soundManager.Music(false);
+	// 		background.sprite = backgroundActive;
+	// 		soundManager.SaveMusicStatus(true);
+	// 	}
+	// 	else
+	// 	{
+	// 		soundManager.Music(true);
+	// 		background.sprite = inactive;
+	// 		soundManager.SaveMusicStatus(false);
+	// 	}
+	// }
 }

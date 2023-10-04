@@ -7,5 +7,8 @@ namespace Controllers
 	{
 		public AchievementsUIController(string key) : base(key)
 		{ }
+
+		protected override void Init()
+		{ }
 	}
 }

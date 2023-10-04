@@ -1,8 +1,6 @@
 using Controllers.Abstract;
-using Cysharp.Threading.Tasks;
 using Shop.Panels.Abstract;
 using UI.Views;
-using UnityEngine;
 
 namespace Controllers
 {
@@ -13,16 +11,9 @@ namespace Controllers
 		public ShopUIController(string key) : base(key)
 		{ }
 
-		public override async UniTask Show(Transform parent)
+		protected override void Init()
 		{
-			await base.Show(parent);
 			View.ShopViewWasOpened += OnShopViewWasOpened;
-		}
-
-		public override async UniTask Hide()
-		{
-			await base.Hide();
-			View.ShopViewWasOpened -= OnShopViewWasOpened;
 		}
 
 		private void OnShopViewWasOpened(IShopController controller)

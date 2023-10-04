@@ -2,7 +2,6 @@ using Controllers.Abstract;
 using Cysharp.Threading.Tasks;
 using Managers.UI.Interfaces;
 using UI.Views;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -15,21 +14,12 @@ namespace Controllers
 		public MenuUIController(string key) : base(key)
 		{ }
 
-		public override async UniTask Show(Transform parent)
+		protected override void Init()
 		{
-			await base.Show(parent);
 			View.ShopClicked += OnShopClicked;
 			View.SettingsClicked += OnSettingsClicked;
 			View.AchievementsClicked += OnAchievementsClicked;
 			View.PlayClicked += OnPlayClicked;
-		}
-
-		public override async UniTask Hide()
-		{
-			await base.Hide();
-			View.ShopClicked -= OnShopClicked;
-			View.SettingsClicked -= OnShopClicked;
-			View.AchievementsClicked -= OnShopClicked;
 		}
 
 		private async void OnShopClicked()
@@ -46,7 +36,7 @@ namespace Controllers
 		{
 			await uiManager.Show<SettingsUIController>();
 		}
-		
+
 		//TODO: rework to inject scene
 		private async void OnPlayClicked()
 		{

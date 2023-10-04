@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PoweupMove : MonoBehaviour
 {
-
 	void OnEnable()
 	{
 		StartCoroutine(MovePowerUpsUp());

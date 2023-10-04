@@ -20,23 +20,19 @@
 /// These are the constants defined in the Play Games Console for Game Services
 /// Resources.
 ///
-
-
 public static class GPGSIds
 {
-        public const string achievement_man_in_black = "CgkI4bKFrL4IEAIQDQ"; // <GPGSID>
-        public const string achievement_thousand = "CgkI4bKFrL4IEAIQBA"; // <GPGSID>
-        public const string leaderboard_high_score = "CgkI4bKFrL4IEAIQAQ"; // <GPGSID>
-        public const string achievement_newbie = "CgkI4bKFrL4IEAIQCQ"; // <GPGSID>
-        public const string achievement_buyer = "CgkI4bKFrL4IEAIQBQ"; // <GPGSID>
-        public const string achievement_without_help = "CgkI4bKFrL4IEAIQBw"; // <GPGSID>
-        public const string achievement_higher_and_higher = "CgkI4bKFrL4IEAIQDA"; // <GPGSID>
-        public const string achievement_dont_miss_it = "CgkI4bKFrL4IEAIQCA"; // <GPGSID>
-        public const string achievement_professional_killer = "CgkI4bKFrL4IEAIQCg"; // <GPGSID>
-        public const string achievement_is_it_dangerous = "CgkI4bKFrL4IEAIQBg"; // <GPGSID>
-        public const string achievement_your_first_time = "CgkI4bKFrL4IEAIQAg"; // <GPGSID>
-        public const string achievement_insane_killer = "CgkI4bKFrL4IEAIQCw"; // <GPGSID>
-        public const string achievement_time_to_go_shopping = "CgkI4bKFrL4IEAIQAw"; // <GPGSID>
-
+	public const string achievement_man_in_black = "CgkI4bKFrL4IEAIQDQ"; // <GPGSID>
+	public const string achievement_thousand = "CgkI4bKFrL4IEAIQBA"; // <GPGSID>
+	public const string leaderboard_high_score = "CgkI4bKFrL4IEAIQAQ"; // <GPGSID>
+	public const string achievement_newbie = "CgkI4bKFrL4IEAIQCQ"; // <GPGSID>
+	public const string achievement_buyer = "CgkI4bKFrL4IEAIQBQ"; // <GPGSID>
+	public const string achievement_without_help = "CgkI4bKFrL4IEAIQBw"; // <GPGSID>
+	public const string achievement_higher_and_higher = "CgkI4bKFrL4IEAIQDA"; // <GPGSID>
+	public const string achievement_dont_miss_it = "CgkI4bKFrL4IEAIQCA"; // <GPGSID>
+	public const string achievement_professional_killer = "CgkI4bKFrL4IEAIQCg"; // <GPGSID>
+	public const string achievement_is_it_dangerous = "CgkI4bKFrL4IEAIQBg"; // <GPGSID>
+	public const string achievement_your_first_time = "CgkI4bKFrL4IEAIQAg"; // <GPGSID>
+	public const string achievement_insane_killer = "CgkI4bKFrL4IEAIQCw"; // <GPGSID>
+	public const string achievement_time_to_go_shopping = "CgkI4bKFrL4IEAIQAw"; // <GPGSID>
 }
-

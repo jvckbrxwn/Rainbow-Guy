@@ -3,16 +3,13 @@ using UnityEngine.Advertisements;
 
 public class AdvManager : MonoBehaviour
 {
+	[SerializeField] private PlayerController _playerControl;
 
-    [SerializeField] private PlayerController _playerControl;
+	void Start()
+	{
+		_playerControl = FindObjectOfType<PlayerController>();
+	}
 
-    void Start()
-    {
-        _playerControl = FindObjectOfType<PlayerController>();
-    }
-
-    public void ShowAd()
-    {
-        
-    }
+	public void ShowAd()
+	{ }
 }

@@ -32,8 +32,8 @@ namespace UI.Views
 	{
 		[SerializeField] private List<ShopViewHolder> shopViewsHolder;
 
-		public event Action<IShopController> ShopViewWasOpened; 
-		
+		public event Action<IShopController> ShopViewWasOpened;
+
 		public override void Show()
 		{
 			gameObject.SetActive(true);

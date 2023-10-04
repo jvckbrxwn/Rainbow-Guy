@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraManager : MonoBehaviour {
-
+public class CameraManager : MonoBehaviour
+{
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
+	void Start ()
+	{ }
+
 	// Update is called once per frame
 }
