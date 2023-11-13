@@ -41,6 +41,7 @@ namespace Controllers
 		private async void OnPlayClicked()
 		{
 			await SceneManager.LoadSceneAsync("GameScene");
+			View.Hide();
 		}
 	}
 }

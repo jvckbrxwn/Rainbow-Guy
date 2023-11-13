@@ -15,9 +15,8 @@ namespace Managers
 
 		public async UniTask<T> GetObjectAsync<T>(string key)
 		{
-			AsyncOperationHandle<GameObject> asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>(key);
-			GameObject obj = await asyncOperationHandle.Task;
-			obj.TryGetComponent(out T component);
+			AsyncOperationHandle<T> asyncOperationHandle = Addressables.LoadAssetAsync<T>(key);
+			T component = await asyncOperationHandle.Task;
 			return component;
 		}
 

@@ -43,7 +43,9 @@ namespace UI.Views
 		}
 
 		public override void Hide()
-		{ }
+		{
+			gameObject.SetActive(false);
+		}
 
 		protected override void Init()
 		{

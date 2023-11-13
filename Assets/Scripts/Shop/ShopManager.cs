@@ -10,7 +10,7 @@ public class ShopManager : BaseMonoManager, IShopManager
 
 	private void Start()
 	{
-		UpdateTextCoins();
+		//UpdateTextCoins();
 	}
 
 	private void UpdateTextCoins()

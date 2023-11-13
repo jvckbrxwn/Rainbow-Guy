@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Managers.Sound.Interfaces;
+using AudioType = Audio.Scriptable.AudioType;
 
 public class BouncyScript : MonoBehaviour
 {
@@ -8,8 +10,9 @@ public class BouncyScript : MonoBehaviour
 	private PlayerController _playerControl;
 	public GameObject spawner;
 	[SerializeField] private AudioClip _redPlatformSound;
-	[SerializeField] private SoundManager _soundManager;
 	[Range(0, 1)] public float volume;
+
+	private ISoundManager soundManager;
 
 	// Use this for initialization
 	void Start()
@@ -17,7 +20,7 @@ public class BouncyScript : MonoBehaviour
 		spawner = GameObject.FindGameObjectWithTag("Respawn");
 		_player = FindObjectOfType<PlayerController>().gameObject;
 		_playerControl = _player.GetComponent<PlayerController>();
-		_soundManager = GameObject.FindObjectOfType<SoundManager>();
+		soundManager = FindObjectOfType<SoundManager>();
 		_collider2D = GetComponent<Collider2D>();
 	}
 
@@ -40,16 +43,18 @@ public class BouncyScript : MonoBehaviour
 			Destroy(gameObject);
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	async void OnTriggerEnter2D(Collider2D other)
 	{
 		other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * _playerControl.JumpSpeed, ForceMode2D.Impulse);
 		if (gameObject.tag == "redPlatform")
 		{
-			_soundManager.RedPlatformSoundPlay(transform);
+			await soundManager.PlaySound(AudioType.RedPlatform);
 			Destroy(gameObject);
 		}
 		else
-			_soundManager.GreenPlatformSoundPlay();
+		{
+			await soundManager.PlaySound(AudioType.GreenPlatform);
+		}
 	}
 }

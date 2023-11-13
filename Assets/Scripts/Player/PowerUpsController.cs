@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 using UnityEngine.UI;
 
 public class PowerUpsController : MonoBehaviour
@@ -62,7 +61,7 @@ public class PowerUpsController : MonoBehaviour
 	{
 		if (other.tag == "PowerUpFalshLightPlatform")
 		{
-			_soundManager.FlashlightOffOn();
+			//_soundManager.FlashlightOffOn();
 			FlashlightPU(other.gameObject, 1f, 0.2f, true);
 			Destroy(other.gameObject);
 		}
@@ -71,7 +70,7 @@ public class PowerUpsController : MonoBehaviour
 			FlashlightPU(other.gameObject, 0.5f, 0.2f, true);
 		if (other.tag == "PowerUpFlashlightOff")
 		{
-			_soundManager.FlashlightOffOn();
+			//_soundManager.FlashlightOffOn();
 			FlashlightPU(other.gameObject, 0f, 0.2f, true, false, 0.2f);
 		}
 	}

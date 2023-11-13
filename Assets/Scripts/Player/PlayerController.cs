@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 	public void Die()
 	{
 		isAccelerationMove = isCompMove = isHalfScreenMove = false;
-		_soundManager.DeathSoundPlay();
+		//_soundManager.DeathSoundPlay();
 		_uiControl.onGameOver();
 	}
 

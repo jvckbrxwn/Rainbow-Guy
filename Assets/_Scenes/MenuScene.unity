@@ -124,7 +124,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &428932019
+--- !u!1 &73324936
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,42 +132,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 428932021}
-  - component: {fileID: 428932022}
-  - component: {fileID: 428932020}
-  - component: {fileID: 428932023}
+  - component: {fileID: 73324938}
+  - component: {fileID: 73324939}
+  - component: {fileID: 73324937}
   m_Layer: 0
-  m_Name: Root
+  m_Name: SceneInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &428932020
+--- !u!114 &73324937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428932019}
+  m_GameObject: {fileID: 73324936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 643238c2df404be4a2069e1c9c4b077a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 4798752535136555620, guid: 2a0a5babe3df4415da183db6911a3330,
-    type: 3}
   shopManager: {fileID: 2330612499582522743, guid: 6eb8e3ed1820c4279881e40e3b651269,
     type: 3}
-  soundManager: {fileID: 7345714940015885575, guid: 7bcbc0dd793aa46f18e89b71e887b977,
-    type: 3}
---- !u!4 &428932021
+--- !u!4 &73324938
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428932019}
+  m_GameObject: {fileID: 73324936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -176,13 +171,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &428932022
+--- !u!114 &73324939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428932019}
+  m_GameObject: {fileID: 73324936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
@@ -190,8 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 428932020}
-  - {fileID: 428932023}
+  - {fileID: 73324937}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -209,18 +203,6 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
---- !u!114 &428932023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428932019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a70b2365c404a9e816066dea96bda4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1141036075
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,4 +378,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1141036080}
   - {fileID: 1345633763}
-  - {fileID: 428932021}
+  - {fileID: 73324938}
