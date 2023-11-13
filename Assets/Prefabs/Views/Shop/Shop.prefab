@@ -135,14 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   shopViewsHolder:
-  - type: 0
-    button: {fileID: 8475610281593367949}
+  - button: {fileID: 8475610281593367949}
     shopController: {fileID: 7051153925311601733}
-  - type: 1
-    button: {fileID: 8997872089983018060}
+  - button: {fileID: 8997872089983018060}
     shopController: {fileID: 8287454412565217917}
-  - type: 2
-    button: {fileID: 5817958218677624334}
+  - button: {fileID: 5817958218677624334}
     shopController: {fileID: 7445784613335418387}
 --- !u!1 &257130669383727637
 GameObject:
@@ -1139,55 +1136,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &2534061387764054713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6925327062185183197}
-  - component: {fileID: 1402318881443481906}
-  m_Layer: 5
-  m_Name: ShopManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6925327062185183197
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2534061387764054713}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4078171554849475867}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1402318881443481906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2534061387764054713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88130d2b2e36723438ecf7fbf2a4867b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _text: {fileID: 1573450865301106384}
 --- !u!1 &3044418139555340928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1542,6 @@ RectTransform:
   - {fileID: 4040900892377151633}
   - {fileID: 7103881499117124098}
   - {fileID: 8721538750382882366}
-  - {fileID: 6925327062185183197}
   m_Father: {fileID: 5964154502658552832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2203,7 +2150,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1402318881443481906}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: CloseBuyPanel
         m_Mode: 1

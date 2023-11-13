@@ -26,6 +26,7 @@ public class SoundManager : MonoBehaviour, ISoundManager
 
 	public async UniTask PlayMusic(MusicType type)
 	{
+		//TODO: Vector3.zero replace to Player current position
 		var key = musicHolder.Holder.First(x => x.type == type).address;
 		var sound = await RetrieveFile(key);
 		AudioSource.PlayClipAtPoint(sound, Vector3.zero, musicVolume);
