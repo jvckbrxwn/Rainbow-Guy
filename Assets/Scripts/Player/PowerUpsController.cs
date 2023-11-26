@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Managers.Player;
 using UnityEngine.UI;
 
 public class PowerUpsController : MonoBehaviour
@@ -13,21 +14,23 @@ public class PowerUpsController : MonoBehaviour
 	[SerializeField] private GameObject _flashlightPanel;
 	private bool isHighJump = false, isDeadly = false;
 	private int low = 0;
-	private PlayerController _playerControl;
 	private ClothesManager _clothesManager;
+	
+	//inject
 	private SoundManager _soundManager;
+	
+	//inject
+	private PlayerManager _playerControl;
 
-	void Awake()
+	private void Awake()
 	{
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 		_collider2D = GetComponent<Collider2D>();
-		_playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		_clothesManager = FindObjectOfType<ClothesManager>();
-		_soundManager = FindObjectOfType<SoundManager>();
 	}
 
-	void Update()
+	private void Update()
 	{
 		if (isFlying)
 			StartCoroutine(FlyPowerUp());
@@ -37,21 +40,21 @@ public class PowerUpsController : MonoBehaviour
 			StartCoroutine(DeadlyPowerUp());
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (gameObject.tag == "Player" || gameObject.tag == "DeadlyPlayer")
+		if (gameObject.CompareTag("Player") || gameObject.CompareTag("DeadlyPlayer"))
 		{
-			if (other.tag == "PowerUpFly")
+			if (other.CompareTag("PowerUpFly"))
 				FlyPU(other);
-			if (other.tag == "PowerUpHighJump")
+			if (other.CompareTag("PowerUpHighJump"))
 				HighJumpPU(other);
-			if (other.tag == "PowerUpDeadly")
+			if (other.CompareTag("PowerUpDeadly"))
 				DeadlyPU(other);
 			FlashlightRoomCollision(other);
 		}
 
 		///mb gavnokod
-		if (gameObject.tag == "FlyPlayer")
+		if (gameObject.CompareTag("FlyPlayer"))
 		{
 			FlashlightRoomCollision(other);
 		}
@@ -59,16 +62,16 @@ public class PowerUpsController : MonoBehaviour
 
 	private void FlashlightRoomCollision(Collider2D other)
 	{
-		if (other.tag == "PowerUpFalshLightPlatform")
+		if (other.CompareTag("PowerUpFalshLightPlatform"))
 		{
 			//_soundManager.FlashlightOffOn();
 			FlashlightPU(other.gameObject, 1f, 0.2f, true);
 			Destroy(other.gameObject);
 		}
 
-		if (other.tag == "PowerUpFlashlight")
+		if (other.CompareTag("PowerUpFlashlight"))
 			FlashlightPU(other.gameObject, 0.5f, 0.2f, true);
-		if (other.tag == "PowerUpFlashlightOff")
+		if (other.CompareTag("PowerUpFlashlightOff"))
 		{
 			//_soundManager.FlashlightOffOn();
 			FlashlightPU(other.gameObject, 0f, 0.2f, true, false, 0.2f);
@@ -78,14 +81,14 @@ public class PowerUpsController : MonoBehaviour
 	private void FlashlightPU(GameObject other, float fade, float time, bool ignoreTimeScale,
 		bool activePanel = true, float offTime = 0f)
 	{
-		if (other.tag == "PowerUpFalshLightPlatform")
+		if (other.CompareTag("PowerUpFalshLightPlatform"))
 			_flashlightPanel.GetComponent<CanvasRenderer>().SetAlpha(0.01f);
 		StartCoroutine(OffFlashLightPanel(activePanel, offTime));
 		_flashlightPanel.GetComponent<Image>().CrossFadeAlpha(fade, time, ignoreTimeScale);
 		Destroy(other);
 	}
 
-	IEnumerator OffFlashLightPanel(bool activePanel, float time)
+	private IEnumerator OffFlashLightPanel(bool activePanel, float time)
 	{
 		yield return new WaitForSeconds(time);
 		_flashlightPanel.SetActive(activePanel);
@@ -120,13 +123,13 @@ public class PowerUpsController : MonoBehaviour
 		}
 	}
 
-	IEnumerator ChangeSpriteBack(Sprite sprite)
+	private IEnumerator ChangeSpriteBack(Sprite sprite)
 	{
 		yield return new WaitForSeconds(5f);
 		_spriteRenderer.sprite = sprite;
 	}
 
-	IEnumerator HighJumpPowerUp()
+	private IEnumerator HighJumpPowerUp()
 	{
 		_playerControl.JumpSpeed = 15;
 		yield return new WaitForSeconds(5f);
@@ -136,23 +139,19 @@ public class PowerUpsController : MonoBehaviour
 		StopCoroutine(HighJumpPowerUp());
 	}
 
-	IEnumerator DeadlyPowerUp()
+	private IEnumerator DeadlyPowerUp()
 	{
-		_playerControl.gameObject.tag = "DeadlyPlayer";
 		yield return new WaitForSeconds(5f);
-		_playerControl.gameObject.tag = "Player";
 		isDeadly = false;
 		StopCoroutine(DeadlyPowerUp());
 	}
 
-	public IEnumerator FlyPowerUp()
+	private IEnumerator FlyPowerUp()
 	{
 		_rigidbody2D.velocity = Vector2.zero;
-		_playerControl.gameObject.tag = "FlyPlayer";
 		_rigidbody2D.AddRelativeForce(Vector2.up * _flySpeed, ForceMode2D.Impulse);
 		yield return new WaitForSeconds(5f);
 		isFlying = false;
-		_playerControl.gameObject.tag = "Player";
 		for (int i = 0; i < _clothesManager._playerSprites.Length; i++)
 		{
 			_clothesManager._playerSprites[i].enabled = true;
@@ -161,7 +160,7 @@ public class PowerUpsController : MonoBehaviour
 		StopCoroutine(FlyPowerUp());
 	}
 
-	void PowerUpAction(PowerUpState state)
+	private void PowerUpAction(PowerUpState state)
 	{
 		if (state == PowerUpState.high_jump)
 			isHighJump = true;
@@ -171,13 +170,13 @@ public class PowerUpsController : MonoBehaviour
 			isDeadly = true;
 	}
 
-	void ChangeSprite(Sprite sprite)
+	private void ChangeSprite(Sprite sprite)
 	{
 		_spriteRenderer.sprite = sprite;
 		StartCoroutine(ChangeSpriteBack(_sprites[3]));
 	}
 
-	enum PowerUpState
+	public enum PowerUpState
 	{
 		fly, high_jump, deadly
 	}

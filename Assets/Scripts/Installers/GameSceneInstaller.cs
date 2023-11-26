@@ -1,13 +1,14 @@
-using Managers.Sound.Interfaces;
+using Managers.Player;
 using UnityEngine;
 using Zenject;
 
-public class GameSceneInstaller : MonoInstaller
+[CreateAssetMenu(fileName = "GameSceneInstaller", menuName = "Installers/GameSceneInstaller")]
+public class GameSceneInstaller : ScriptableObjectInstaller<GameSceneInstaller>
 {
-	[SerializeField] private SoundManager soundManager;
-
 	public override void InstallBindings()
 	{
-		Container.Bind<ISoundManager>().To<SoundManager>().FromComponentInNewPrefab(soundManager).AsSingle().NonLazy();
+		//Player
+		Container.BindInterfacesAndSelfTo<PlayerManager>().AsSingle()
+			.WithArguments("Player");
 	}
 }

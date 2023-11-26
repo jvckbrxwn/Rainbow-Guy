@@ -16,7 +16,7 @@ namespace Managers.UI
 
 		[Inject] private IUIController[] uiControllers;
 
-		private async void Start()
+		private async void Awake()
 		{
 			await Show<MenuUIController>();
 		}

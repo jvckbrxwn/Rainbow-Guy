@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf35a8c72d3f2d4bbc68fbd6e28d598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundVolume: 0.6
+  soundVolume: 0.4
   musicVolume: 0.6
   musicHolder: {fileID: 11400000, guid: 7b5914725febf4ad09499e1cf4f6a842, type: 2}
   soundHolder: {fileID: 11400000, guid: 2aeb6180ce53741119f152396fe7f4a7, type: 2}

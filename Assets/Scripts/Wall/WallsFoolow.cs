@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Controllers.Player;
 
 public class WallsFoolow : MonoBehaviour
 {
 	[SerializeField] private GameObject _player;
 	[SerializeField] private Transform _leftWall;
 	[SerializeField] private Transform _rightWall;
-	[SerializeField] private TrailRenderer _trailRender;
 
 	void Start()
 	{
 		_player = FindObjectOfType<PlayerController>().gameObject;
-		_trailRender = _player.GetComponent<TrailRenderer>();
 		_leftWall.position = -Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0));
 		_rightWall.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0));
 	}

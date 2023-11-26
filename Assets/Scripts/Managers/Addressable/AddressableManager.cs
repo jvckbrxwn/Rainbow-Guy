@@ -20,7 +20,7 @@ namespace Managers
 			return component;
 		}
 
-		public async UniTask<T> InstantiateObject<T>(string key, Transform parent) where T : class
+		public async UniTask<T> InstantiateObject<T>(string key, Transform parent = null) where T : class
 		{
 			if (components.Any(x => x.TryGetComponent(typeof(T), out _)))
 			{

@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4809679711002238}
   m_Layer: 0
-  m_Name: room_enemys
+  m_Name: room_enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

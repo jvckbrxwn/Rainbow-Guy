@@ -1,18 +1,20 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Controllers.Player;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
 	[SerializeField] private Sprite[] _enemySprites;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
-	[SerializeField] private PlayerController _playerControl;
+	
+	//inject
+	private PlayerController _playerControl;
 
 	// Use this for initialization
 	void Awake ()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_playerControl = GameObject.FindObjectOfType<PlayerController>();
+		_playerControl = FindObjectOfType<PlayerController>();
 	}
 
 	void Start()
