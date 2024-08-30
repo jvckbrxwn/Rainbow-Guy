@@ -1,11 +1,11 @@
-using Player.MoveSystem.Abstract;
+using Player.Movement.Abstract;
 using UnityEngine;
 
-namespace Player.MoveSystem
+namespace Player.Movement
 {
 	public class PhoneHalfScreenPlayerMoving : BasePlayerMoving
 	{
-		public PhoneHalfScreenPlayerMoving(Transform transform, float moveSpeed) : base(transform, moveSpeed)
+		public PhoneHalfScreenPlayerMoving(Rigidbody2D rigidbody2D) : base(rigidbody2D)
 		{ }
 		
 		public override void Move()
@@ -18,11 +18,11 @@ namespace Player.MoveSystem
 				//Check if it is left or right?
 				if (touchPosition.x > halfScreen)
 				{
-					Transform.Translate(Vector3.right * (MoveSpeed * Time.deltaTime));
+					Rigidbody2D.velocity = Vector3.right * (MoveSpeed * Time.deltaTime);
 				}
 				else if (touchPosition.x < halfScreen)
 				{
-					Transform.Translate(Vector3.left * (MoveSpeed * Time.deltaTime));
+					Rigidbody2D.velocity = Vector3.left * (MoveSpeed * Time.deltaTime);
 				}
 			}
 		}

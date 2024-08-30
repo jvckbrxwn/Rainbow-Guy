@@ -32,6 +32,7 @@ namespace Controllers.Abstract
 		public virtual async UniTask Hide()
 		{
 			View.Hide();
+			await UniTask.CompletedTask;
 		}
 
 		protected abstract void Init();

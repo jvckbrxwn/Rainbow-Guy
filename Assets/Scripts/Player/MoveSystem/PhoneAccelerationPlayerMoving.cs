@@ -1,20 +1,17 @@
-using Player.MoveSystem.Abstract;
+using Player.Movement.Abstract;
 using UnityEngine;
 
-namespace Player.MoveSystem
+namespace Player.Movement
 {
 	public class PhoneAccelerationPlayerMoving : BasePlayerMoving
 	{
-		private Vector3 prevLoc = Vector3.zero;
-		
-		public PhoneAccelerationPlayerMoving(Transform transform, float moveSpeed) : base(transform, moveSpeed)
+		public PhoneAccelerationPlayerMoving(Rigidbody2D rigidbody2D) : base(rigidbody2D)
 		{ }
 
 		public override void Move()
 		{
-			Transform.Translate(Input.acceleration.normalized.x * 15f * Time.deltaTime, 0f, 0f);
-			Vector3 curVel = (Transform.position - prevLoc) / Time.deltaTime;
-			prevLoc = Transform.position;
+			Rigidbody2D.velocity = new Vector2(Input.acceleration.normalized.x * MoveSpeed * Time.deltaTime,
+				Vector3.down.y * (MoveSpeed * Time.deltaTime));
 		}
 	}
 }

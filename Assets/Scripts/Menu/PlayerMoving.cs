@@ -1,6 +1,5 @@
-﻿using Player.MoveSystem;
-using UnityEngine;
-using Player.MoveSystem.Interfaces;
+﻿using UnityEngine;
+using Player.Movement.Interfaces;
 
 namespace Managers.Player
 {
@@ -15,13 +14,10 @@ namespace Managers.Player
 
 		private IPlayerMoving playerMoving;
 
-		private void Awake()
+		public void Init(IPlayerMoving playerMoving)
 		{
-#if UNITY_EDITOR
-			playerMoving = new EditorPlayerMoving(transform, moveSpeed);
-#elif UNITY_IOS || UNITY_ANDROID
-			playerMoving = new PhoneAccelerationPlayerMoving(transform, moveSpeed);
-#endif
+			this.playerMoving = playerMoving;
+			this.playerMoving.SetSpeed(moveSpeed);
 		}
 
 		private void Update()
@@ -35,6 +31,11 @@ namespace Managers.Player
 			_cloth._playerSprites[0].flipX = isFlip;
 			_cloth._playerSprites[1].flipX = isFlip;
 			_cloth._playerSprites[2].flipX = isFlip;
+		}
+
+		public void Jump()
+		{
+			playerMoving.Jump();
 		}
 	}
 }

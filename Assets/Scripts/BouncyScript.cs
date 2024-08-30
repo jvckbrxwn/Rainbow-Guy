@@ -1,4 +1,4 @@
-﻿using Managers.Player;
+﻿using Controllers.Player;
 using UnityEngine;
 using Managers.Sound.Interfaces;
 
@@ -9,8 +9,9 @@ public class BouncyScript : MonoBehaviour
 
 	//inject
 	private ISoundManager soundManager;
+
 	//inject
-	private PlayerManager playerManager;
+	private PlayerController playerManager;
 
 	// Use this for initialization
 	void Start()

@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Managers.Base;
 using Managers.Interfaces;
 using Managers.UI.Interfaces;
-using UnityEngine;
 using Zenject;
 
 namespace Managers.Player
@@ -23,14 +22,14 @@ namespace Managers.Player
 
 		public float JumpSpeed { get; set; }
 
-		private async UniTask CreatePlayer(string playerKey)
-		{
-			playerController = await addressableManager.InstantiateObject<PlayerController>(playerKey);
-		}
-
 		public override void Initialize()
 		{
 			CreatePlayer(playerKey).Forget();
+		}
+
+		private async UniTask CreatePlayer(string playerKey)
+		{
+			playerController = await addressableManager.InstantiateObject<PlayerController>(playerKey);
 		}
 	}
 

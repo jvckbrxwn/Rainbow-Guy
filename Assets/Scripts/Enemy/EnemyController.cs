@@ -8,13 +8,13 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 	
 	//inject
-	private PlayerController _playerControl;
+	private PlayerController playerControl;
 
 	// Use this for initialization
 	void Awake ()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_playerControl = FindObjectOfType<PlayerController>();
+		playerControl = FindFirstObjectByType<PlayerController>();
 	}
 
 	void Start()
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 	IEnumerator MoveEnemy()
 	{
 		GetComponent<SpriteRenderer>().flipX = true;
-		LeanTween.moveLocalX(gameObject, transform.localPosition.x + 0.15f, .5f);
+		//LeanTween.moveLocalX(gameObject, transform.localPosition.x + 0.15f, .5f);
 		yield return new WaitForSeconds(.5f);
 		StartCoroutine(MoveEnemyBack());
 	}
@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
 	IEnumerator MoveEnemyBack()
 	{
 		GetComponent<SpriteRenderer>().flipX = false;
-		LeanTween.moveLocalX(gameObject, transform.localPosition.x - 0.15f, .5f);
+		//LeanTween.moveLocalX(gameObject, transform.localPosition.x - 0.15f, .5f);
 		yield return new WaitForSeconds(.5f);
 		StartCoroutine(MoveEnemy());
 	}

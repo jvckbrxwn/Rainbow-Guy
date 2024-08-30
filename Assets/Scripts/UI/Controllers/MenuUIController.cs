@@ -1,7 +1,7 @@
 using Controllers.Abstract;
-using Cysharp.Threading.Tasks;
 using Managers.UI.Interfaces;
 using UI.Views;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 

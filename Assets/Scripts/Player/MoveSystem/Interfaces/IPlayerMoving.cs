@@ -1,9 +1,9 @@
-using UnityEngine;
-
-namespace Player.MoveSystem.Interfaces
+namespace Player.Movement.Interfaces
 {
 	public interface IPlayerMoving
 	{
 		void Move();
+		void SetSpeed(float speed);
+		void Jump();
 	}
 }

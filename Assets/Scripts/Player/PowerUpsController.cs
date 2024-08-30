@@ -13,7 +13,6 @@ public class PowerUpsController : MonoBehaviour
 	[SerializeField] private Collider2D _collider2D;
 	[SerializeField] private GameObject _flashlightPanel;
 	private bool isHighJump = false, isDeadly = false;
-	private int low = 0;
 	private ClothesManager _clothesManager;
 	
 	//inject
@@ -27,7 +26,7 @@ public class PowerUpsController : MonoBehaviour
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 		_collider2D = GetComponent<Collider2D>();
-		_clothesManager = FindObjectOfType<ClothesManager>();
+		_clothesManager = FindFirstObjectByType<ClothesManager>();
 	}
 
 	private void Update()
